@@ -19,5 +19,6 @@ Despues de clonar localmente y editar o agregar archivos
 * https://github.com/flowsta/github
 * http://rogerdudler.github.io/git-guide/index.es.html
 * http://rogerdudler.github.io/git-guide/
+* http://blog.santiagobasulto.com.ar/programacion/2011/11/27/tutorial-de-git-en-espanol.html
 
 
