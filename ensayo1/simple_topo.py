@@ -9,6 +9,9 @@ Two directly connected switches plus a host for each switch:
 
 Adding the 'topos' dict with a key/value pair to generate our newly defined
 topology enables one to pass in '--topo=mytopo' from the command line.
+
+More info: http://mininet.org/walkthrough/
+Use: sudo mn --custom simple_topo.py --topo mytopo 
 """
 
 from mininet.topo import Topo
