@@ -33,9 +33,16 @@ def topology():
     net = Containernet()    
 
     info('*** Adding docker containers\n')
+    '''
+    Containers de imagenes sin herramientas de red
     h1 = net.addDocker('h1', ip='10.0.0.100', dimage="ubuntu:latest")
     h2 = net.addDocker('h2', ip='10.0.0.101', dimage="ubuntu:latest") 
     h3 = net.addDocker('h3', ip='10.0.0.102', dimage="ubuntu:latest")  
+    '''
+    # Containers de imagenes con herramientas de red 
+    h1 = net.addDocker('h1', ip='10.0.0.100', dimage="ubuntu_net_tools")
+    h2 = net.addDocker('h2', ip='10.0.0.101', dimage="ubuntu_net_tools") 
+    h3 = net.addDocker('h3', ip='10.0.0.102', dimage="ubuntu_net_tools") 
 
     info('*** Adding switch\n')
     s1 = net.addSwitch('s1')
