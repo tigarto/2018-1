@@ -4,6 +4,9 @@
 
 ### Test 1
 
+**Resumen**:
+Usando mininet montar una topologia sencilla de 3 host conectados de manera simple.
+
 **Archivo**: simple_topo.py 
 
 **Topologia montada empleando mininet**:
@@ -26,4 +29,56 @@ http://mininet.org/walkthrough/
 > **Nota**
 > No se usa controlador para la programacion del switch
 
+### Test 2
+
+**Resumen**:
+Usando containernet hacer la misma prueba anterior.
+
+**Notas**: Por lo menos hacer lo siguiente antes de correr si el script no arranca
+1. Si hay algun container corriendo este se debera eliminar ``````
+2. Tambien es necesario correr mn -c
+3. Para hacer mejor el test es necesario que la imagen a emplear tengan herramientas que permitan correr el comando ping por ejemplo.
+
+**Topologia montada empleando containernet**:
+
+```
+h1 --- s1 --- h3
+       |
+       |
+       h2
+```
+
+**Imagenes**:
+
+
+**Algunos comandos de test en containernet>**:
+```
+nodes
+net
+xterm h1
+xterm h2
+xterm h3
+```
+
+
+**Comandos docker a la mano**:
+
+```
+# Comandos variados
+sudo docker images
+sudo docker ps -a
+
+# One liner to stop / remove all of Docker containers
+docker stop $(docker ps -a -q)
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+
+# corriendo consola de un container
+docker --hostname h1 --name ubuntu_container run -it ubuntu bash
+```
+
+
+
+# Enlaces:
+* https://blog.codeship.com/the-basics-of-the-docker-run-command/
 
