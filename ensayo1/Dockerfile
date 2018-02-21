@@ -23,7 +23,7 @@ FROM ${base}:${CODE_VERSION}
 # Herramientas adicionales a instalar
 RUN apt-get update
 RUN apt-get install -y net-tools
-RUN apt-get install -y mtr-tiny traceroute netcat dnsutils curl
+RUN apt-get install -y mtr-tiny traceroute netcat dnsutils curl iputils-ping
 
 # Instruccion a ejecutar
 CMD bash
