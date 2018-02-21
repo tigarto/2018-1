@@ -1,21 +1,20 @@
 #!/usr/bin/python
 
 """
-This example shows how to create a simple network and
-how to create docker containers (based on existing images)
-to it.
+This example shows how to create a simple network and how to create docker containers (based on existing images) to it.
 
 Two directly connected switches plus a host for each switch:
 
+          c0
+          |
+          |
    h1 --- s1 --- h3
           |
           |
           h2
 
-Adding the 'topos' dict with a key/value pair to generate our newly defined
-topology enables one to pass in '--topo=mytopo' from the command line.
 
-More info: http://mininet.org/walkthrough/
+
 Use: sudo python simple_topo_containers.py 
 
 """
@@ -30,7 +29,10 @@ from mininet.link import TCLink, Link
 def topology():
     "Create a network with some docker containers acting as hosts."
 
-    net = Containernet()    
+    net = Containernet(controller=Controller)
+
+    info('*** Adding controller\n')
+    net.addController('c0')   
 
     info('*** Adding docker containers\n')
     '''
@@ -57,6 +59,8 @@ def topology():
     info('*** Starting network\n')
     net.start()
     
+    info('***Testing network connectivity***')
+    net.pingAll()
 
     info('*** Running CLI\n')
     CLI(net)
