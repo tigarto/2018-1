@@ -22,6 +22,7 @@ h1 --- s1 --- h3
 ```
 sudo mn --custom simple_topo.py --topo mytopo 
 ```
+**URL**: https://github.com/tigarto/2018-1/tree/master/ensayo1/test1
 
 **Para mas informacion**: 
 http://mininet.org/walkthrough/
@@ -34,12 +35,12 @@ http://mininet.org/walkthrough/
 **Resumen**:
 Usando containernet hacer la misma prueba anterior.
 
-**Notas**: Por lo menos hacer lo siguiente antes de correr si el script no arranca
-1. Si hay algun container corriendo este se debera eliminar ```docker stop ...```
-2. Tambien es necesario correr mn -c
-3. Para hacer mejor el test es necesario que la imagen a emplear tengan herramientas que permitan correr el comando ping por ejemplo.
-4. Se creo un **Dockerfile** con las herramientas de red. El nombre de la imagen producida con el comando ```sudo docker build -t ubuntu_net_tools .``` fue **ubuntu_net_tools**. De como que se procedio a modificar las imagenes cargadas en los containers, el anterior comando debe ser ejecutado previo a la simulacion si la imagen **ubuntu_net_tools** no ha sido creada.
-5. A diferencia del caso tradicional con mininet, fue necesario agregar el controlador.
+> **Notas**: Por lo menos hacer lo siguiente antes de correr si el script no arranca
+> 1. Si hay algun container corriendo este se debera eliminar ```docker stop ...```
+> 2. Tambien es necesario correr mn -c
+> 3. Para hacer mejor el test es necesario que la imagen a emplear tengan herramientas que permitan correr el comando ping por ejemplo.
+> 4. Se creo un **Dockerfile** con las herramientas de red. El nombre de la imagen producida con el comando ```sudo docker build -t ubuntu_net_tools .``` fue **ubuntu_net_tools**. De como que se procedio a modificar las imagenes cargadas en los containers, el anterior comando debe ser ejecutado previo a la simulacion si la imagen **ubuntu_net_tools** no ha sido creada.
+> 5. A diferencia del caso tradicional con mininet, fue necesario agregar el controlador.
 
 **Topologia montada empleando containernet**:
 
@@ -63,6 +64,7 @@ sudo python simple_topo_containers.py
 
 Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Dockerfile](https://github.com/tigarto/2018-1/blob/master/ensayo1/Dockerfile) el cual esta basado en ubuntu pero que tiene instaladas herramientas de red para poder hacer pruebas como el ping. La imagen se puede encontrar como ubuntu_net_tools cuando se digita el comando ```sudo docker images```. 
 
+**URL**: https://github.com/tigarto/2018-1/tree/master/ensayo1/test2
 
 **Algunos comandos de test en containernet>**:
 ```
@@ -97,7 +99,7 @@ docker rm containerName
 ```
 
 
-# Enlaces:
+## Enlaces:
 * https://blog.codeship.com/the-basics-of-the-docker-run-command/
 * https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images
 * https://github.com/mininet/mininet/wiki/Introduction-to-Mininet
