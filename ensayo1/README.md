@@ -35,9 +35,10 @@ http://mininet.org/walkthrough/
 Usando containernet hacer la misma prueba anterior.
 
 **Notas**: Por lo menos hacer lo siguiente antes de correr si el script no arranca
-1. Si hay algun container corriendo este se debera eliminar ``````
+1. Si hay algun container corriendo este se debera eliminar ```docker stop ...```
 2. Tambien es necesario correr mn -c
 3. Para hacer mejor el test es necesario que la imagen a emplear tengan herramientas que permitan correr el comando ping por ejemplo.
+4. Se creo un **Dockerfile** con las herramientas de red. El nombre de la imagen producida con el comando ```sudo docker build -t ubuntu_net_tools .``` fue ubuntu_net_tools. De como que se procedio a modificar las imagenes cargadas en los containers
 
 **Topologia montada empleando containernet**:
 
@@ -75,10 +76,13 @@ docker rm $(docker ps -a -q)
 
 # corriendo consola de un container
 docker --hostname h1 --name ubuntu_container run -it ubuntu bash
-```
 
+# Removiendo un nombre de un container
+docker rm containerName
+```
 
 
 # Enlaces:
 * https://blog.codeship.com/the-basics-of-the-docker-run-command/
+* https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images
 
