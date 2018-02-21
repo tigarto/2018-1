@@ -7,6 +7,11 @@
 ### Ensayo 1
 Retomando el uso de mininet montando una topologia sencilla de 3 host conectados de manera simple. Para mas informacion puede consultar el siguiente [enlace](https://github.com/tigarto/2018-1/tree/master/ensayo1/)
 
+## Historico
+
+| Fecha  | Actividad |
+| ------------- | ------------- |
+| 21/02/2017  | Se monto el mismo ejemplo sencillo (**Ensayo 1**) usando mininet y containernet  |
 
 ## Apuntes
 
