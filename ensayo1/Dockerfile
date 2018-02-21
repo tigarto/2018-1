@@ -1,16 +1,18 @@
 # COMANDOS:
 # 1. Para crear la imagen
 #    
-#             docker build -t [name] .
+#             sudo docker build -t [name] .
 #
 #    Ejemplo:
-#    docker build -t ubuntu_net_tools .
+#    sudo docker build -t ubuntu_net_tools .
 #
 # 2. Para correr un container a partir de la imagen
 #   
-#             docker run -name [instanceName] -i -t [name]
+#             sudo docker run -name [instanceName] -i -t [name]
+#              sudo docker images
+#
 #    Ejemplo:
-#    docker run -name ubuntu1 -i -t ubuntu_net_tools
+#    sudo docker run -name ubuntu1 -i -t ubuntu_net_tools
 
 
 # Imagen base
