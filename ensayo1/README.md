@@ -39,10 +39,14 @@ Usando containernet hacer la misma prueba anterior.
 2. Tambien es necesario correr mn -c
 3. Para hacer mejor el test es necesario que la imagen a emplear tengan herramientas que permitan correr el comando ping por ejemplo.
 4. Se creo un **Dockerfile** con las herramientas de red. El nombre de la imagen producida con el comando ```sudo docker build -t ubuntu_net_tools .``` fue ubuntu_net_tools. De como que se procedio a modificar las imagenes cargadas en los containers
+5. A diferencia del caso tradicional con mininet, fue necesario agregar el controlador.
 
 **Topologia montada empleando containernet**:
 
 ```
+       c0
+       |
+       |
 h1 --- s1 --- h3
        |
        |
@@ -59,6 +63,9 @@ net
 xterm h1
 xterm h2
 xterm h3
+# Con los contenedores con herramientas de red instaladas si dan comandos como los mostrados abajo
+pingall
+h1 ping -c 2 h2
 ```
 
 
@@ -85,4 +92,7 @@ docker rm containerName
 # Enlaces:
 * https://blog.codeship.com/the-basics-of-the-docker-run-command/
 * https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images
+* https://github.com/mininet/mininet/wiki/Introduction-to-Mininet
+* http://noise.gatech.edu/classes/cs8803sdn/fall2014/
+
 
