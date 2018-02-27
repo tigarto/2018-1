@@ -95,12 +95,13 @@ h1 --- s1 --- h3
 ```
 
 
-**Archivo**: simple_topo.py 
+#### Forma 1
 
 
 
+## Apendice
 
-**Algunos comandos de test en containernet>**:
+**Algunos comandos de test en containernet**:
 ```
 nodes
 net
