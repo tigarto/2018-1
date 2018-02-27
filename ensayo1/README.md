@@ -78,7 +78,7 @@ git clone http://github.com/noxrepo/pox
 
 **Resumen**:
 Usando mininet montar una topologia sencilla de 3 host conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
-1. **Forma 1**: Por medio de linea de comandos para arrancar la topologia y el controlador.
+1. **Forma 1**: Por medio de linea de comandos para arrancar la red y el controlador.
 2. **Forma 2**: Llamando un script para la topologia y corriendo un controlador externo.
 3. **Forma 3**: Corriendo en linea de comandos tanto la topologia como el controlador.
 
@@ -95,8 +95,24 @@ h1 --- s1 --- h3
 ```
 
 
-#### Forma 1
+#### Forma 1 - Arrancando red y controlador por medio de linea de comandos
 
+**Archivo**: ---
+
+**Uso**: Se abren dos consolas, en una se correra el controlador como switch, en la otra correra la red.
+
+**Controlador**: Primero se llamó esta consola
+
+```
+cd $HOME/pox
+./pox.py log.level --DEBUG forwarding.l2_learning
+```
+
+**Red**: Luego, ejecuando el comando de ```mn``` se creo la red que sera controlada por el controlador POX:
+
+```
+sudo mn --custom simple_topo_controller_mn.py --topo single3 --controller=remote,ip=127.0.0.1,port=6633
+```
 
 
 ## Apendice
