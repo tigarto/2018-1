@@ -66,6 +66,40 @@ Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Doc
 
 **URL**: https://github.com/tigarto/2018-1/tree/master/ensayo1/test2
 
+### Test 3
+
+**Aspectos previos**
+1. Verificar que se tiene instalado el controlador POX en la maquina, si no es asi en el siguiente [enlace](http://networkstatic.net/pox-openflow-controller-installation-screencast/) se brinda informacion muy util para dicha tarea, en todo caso, esto puede reducirse a los siguientes dos comandos:
+
+```
+cd $HOME
+git clone http://github.com/noxrepo/pox
+```
+
+**Resumen**:
+Usando mininet montar una topologia sencilla de 3 host conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
+1. **Forma 1**: Por medio de linea de comandos para arrancar la topologia y el controlador.
+2. **Forma 2**: Llamando un script para la topologia y corriendo un controlador externo.
+3. **Forma 3**: Corriendo en linea de comandos tanto la topologia como el controlador.
+
+**Topologia montada empleando mininet**:
+
+```
+       c0
+       |
+       |
+h1 --- s1 --- h3
+       |
+       |
+       h2
+```
+
+
+**Archivo**: simple_topo.py 
+
+
+
+
 **Algunos comandos de test en containernet>**:
 ```
 nodes
@@ -97,6 +131,7 @@ docker --hostname h1 --name ubuntu_container run -it ubuntu bash
 # Removiendo un nombre de un container
 docker rm containerName
 ```
+
 
 
 ## Enlaces:
