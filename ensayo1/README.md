@@ -80,7 +80,8 @@ git clone http://github.com/noxrepo/pox
 **Resumen**:
 Usando mininet montar una topologia sencilla de 3 host conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
 1. **Forma 1**: Por medio de linea de comandos para arrancar la red y el controlador.
-2. **Forma 2**: Llamando un script para la topologia y corriendo un controlador externo.
+2. **Forma 2**: Definiendo la topologia en un script y llamandola con mininet y corriendo un controlador externo.
+2. **Forma 3**: Llamando un script para la topologia y corriendo un controlador externo.
 3. **Forma 3**: Corriendo en linea de comandos tanto la topologia como el controlador.
 
 **Topologia montada empleando mininet**:
@@ -102,21 +103,72 @@ h1 --- s1 --- h3
 
 **Uso**: Se abren dos consolas, en una se correra el controlador como switch, en la otra correra la red.
 
-**Controlador**: Primero se llamó esta consola
+* **Controlador**: Primero se llamó esta consola
 
 ```
 cd $HOME/pox
 ./pox.py log.level --DEBUG forwarding.l2_learning
 ```
 
-**Red**: Luego, ejecuando el comando de ```mn``` se creo la red que sera controlada por el controlador POX:
+* **Red**: Luego, ejecuando el comando de ```mn``` se creo la red que sera controlada por el controlador POX:
+
+```
+sudo mn --topo single,3 --controller=remote,ip=127.0.0.1,port=6633
+```
+
+#### Forma 2 - Llamando con mininet una topologia definida en un script y corriendo un controlador externo
+
+**Archivo**: [simple_topo_controller_mn.py](https://github.com/tigarto/2018-1/blob/master/ensayo1/test3/simple_topo_controller_mn.py)
+
+**Uso**: Se abren dos consolas, en una se correra el controlador como switch, en la otra se llama desde mininet el script asociado a la topologia.
+
+* **Controlador**: Primero se llamó esta consola
+
+```
+cd $HOME/pox
+./pox.py log.level --DEBUG forwarding.l2_learning
+```
+
+* **Red**: Luego, ejecuando el comando de ```mn``` se creo la red que sera controlada por el controlador POX:
 
 ```
 sudo mn --custom simple_topo_controller_mn.py --topo single3 --controller=remote,ip=127.0.0.1,port=6633
 ```
 
-#### Forma 2 - Arrancando red desde un script y el controlador manualmente
+#### Forma 3 - Llamando la red desde un script y corriendo un controlador externo manualmente desde consola
 
+**Archivo**: [simple_topo_controller1.py](https://github.com/tigarto/2018-1/blob/master/ensayo1/test3/simple_topo_controller1.py)
+
+**Uso**: Se abren dos consolas, en una se correra el controlador como switch, en la otra se llama desde mininet el script asociado a la topologia.
+
+* **Controlador**: Primero se llamó esta consola
+
+```
+cd $HOME/pox
+./pox.py log.level --DEBUG forwarding.l2_learning
+```
+
+* **Red**: Luego, asumiendo que el script de python tiene permisos de ejecucion (```chmod +x [simple_topo_controller1.py```) el comando a ejecutar es:
+
+```
+./sudo simple_topo_controller1.py
+```
+
+#### Forma 4 - Llamando la red y el controlador que funcionara como switch desde un script
+
+**Archivo**: [simple_topo_controller2.py](https://github.com/tigarto/2018-1/blob/master/ensayo1/test3/simple_topo_controller2.py)
+
+**Uso**: Con una sola consola que se abra para este caso, es suficiente.
+
+* **Controlador y red**: 
+
+```
+./sudo simple_topo_controller2.py
+```
+
+### Test 4
+
+En construccion, se hará uso de containers y el proposito es reproducir las formas 3 y 4. Dispulpe las molestias causadas.
 
 ## Apendice
 
