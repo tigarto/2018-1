@@ -75,6 +75,7 @@ Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Doc
 cd $HOME
 git clone http://github.com/noxrepo/pox
 ```
+2. Se empleo para dar permiso de ejecucion en los scripts de python el comando ```chmod +x nombreScript.py```
 
 **Resumen**:
 Usando mininet montar una topologia sencilla de 3 host conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
@@ -93,7 +94,7 @@ h1 --- s1 --- h3
        |
        h2
 ```
-
+**Directorio con los ejemplos**: [test3](https://github.com/tigarto/2018-1/tree/master/ensayo1/test3)
 
 #### Forma 1 - Arrancando red y controlador por medio de linea de comandos
 
@@ -113,6 +114,8 @@ cd $HOME/pox
 ```
 sudo mn --custom simple_topo_controller_mn.py --topo single3 --controller=remote,ip=127.0.0.1,port=6633
 ```
+
+#### Forma 2 - Arrancando red desde un script y el controlador manualmente
 
 
 ## Apendice
