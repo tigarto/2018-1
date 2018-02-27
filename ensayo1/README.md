@@ -82,7 +82,7 @@ Usando mininet montar una topologia sencilla de 3 host conectados a un mismo swi
 1. **Forma 1**: Por medio de linea de comandos para arrancar la red y el controlador.
 2. **Forma 2**: Definiendo la topologia en un script y llamandola con mininet y corriendo un controlador externo.
 2. **Forma 3**: Llamando un script para la topologia y corriendo un controlador externo.
-3. **Forma 3**: Corriendo en linea de comandos tanto la topologia como el controlador.
+3. **Forma 4**: Corriendo en linea de comandos tanto la topologia como el controlador.
 
 **Topologia montada empleando mininet**:
 
