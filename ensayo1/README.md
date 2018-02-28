@@ -68,14 +68,14 @@ Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Doc
 
 ### Test 3
 
-**Aspectos previos**
-1. Verificar que se tiene instalado el controlador POX en la maquina, si no es asi en el siguiente [enlace](http://networkstatic.net/pox-openflow-controller-installation-screencast/) se brinda informacion muy util para dicha tarea, en todo caso, esto puede reducirse a los siguientes dos comandos:
-
-```
-cd $HOME
-git clone http://github.com/noxrepo/pox
-```
-2. Se empleo para dar permiso de ejecucion en los scripts de python el comando ```chmod +x nombreScript.py```
+> **Aspectos previos**
+> 1. Verificar que se tiene instalado el controlador POX en la maquina, si no es asi en el siguiente [enlace](http://networkstatic.net/pox-openflow-controller-installation-screencast/) se brinda informacion muy util para dicha tarea, en todo caso, esto puede reducirse a los siguientes dos comandos:
+>
+> ```
+> cd $HOME
+> git clone http://github.com/noxrepo/pox
+> ```
+> 2. Se empleo para dar permiso de ejecucion en los scripts de python el comando ```chmod +x nombreScript.py```
 
 **Resumen**:
 Usando mininet montar una topologia sencilla de 3 host conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
@@ -87,7 +87,7 @@ Usando mininet montar una topologia sencilla de 3 host conectados a un mismo swi
 **Topologia montada empleando mininet**:
 
 ```
-       c0
+    c0 = (POX)
        |
        |
 h1 --- s1 --- h3
@@ -168,11 +168,72 @@ cd $HOME/pox
 
 ### Test 4
 
-En construccion, se hará uso de containers y el proposito es reproducir las formas 3 y 4. Dispulpe las molestias causadas.
+**Resumen**:
+Usando containernet hacer la misma prueba del test 3.
+
+> **Aspectos previos**: 
+> Los comandos ejecutados durante la prueba asumen que ya se tiene configurada la maquina de la siguiente manera:
+> 1. Se se tiene la imagen **ubuntu_net_tools** lista, si no es asi dirijase al **test 2** descrito arriba y contruyala a partir del **Dockerfile** siguiendo las instrucciones alli expuestas.
+> 2. Se tiene el controlador POX instalado, si no dirijase a la seccion de aspectos previos del **test 3** y siga los pasos alli descritos para llevar a cabo la instalación.
+> 3. No se le dieron permisos de ejecucion a los scripts de python por lo que la ejecucion de estos será empleando el comando ```python```
+
+**Topologia montada empleando mininet**:
+
+```
+    c0 = POX
+       |
+       |
+h1 --- s1 --- h3
+       |
+       |
+       h2
+```
+
+**Imagenes**:
+
+Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Dockerfile](https://github.com/tigarto/2018-1/blob/master/ensayo1/Dockerfile) el cual esta basado en ubuntu pero que tiene instaladas herramientas de red para poder hacer pruebas como el ping. La imagen se puede encontrar como ubuntu_net_tools cuando se digita el comando ```sudo docker images```.
+
+**Directorio con los ejemplos**: [test3](https://github.com/tigarto/2018-1/tree/master/ensayo1/test4)
+
+**Resumen**:
+Usando mininet montar una topologia sencilla de 3 contenedores (que corren una imagen de ubuntu) conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
+1. **Forma 1**: Llamando un script para la topologia y corriendo un controlador externo.
+2. **Forma 2**: Corriendo en linea de comandos tanto la topologia como el controlador.
+
+#### Forma 1 - Llamando la red desde un script y corriendo un controlador externo manualmente desde consola
+
+**Archivo**: [simple_topo_containers1.py](https://github.com/tigarto/2018-1/blob/master/ensayo1/test4/simple_topo_containers1.py)
+
+**Uso**: Se abren dos consolas, en una se correra el controlador como switch, en la otra se llama desde mininet el script asociado a la topologia. **Nota**: se debe correr primero el controlador para que se pueda enganchar con la topologia, si no este enchanche no se logra (la verdad no se porque).
+
+* **Controlador**: Primero se llamó esta consola
+
+```
+cd $HOME/pox
+./pox.py log.level --DEBUG forwarding.l2_learning
+```
+
+* **Red**: Luego, asumiendo que el script de python tiene permisos de ejecucion el comando a ejecutar es:
+
+```
+./sudo python simple_topo_containers1.py
+```
+#### Forma 2 - Llamando la red y el controlador que funcionara como switch desde un script
+
+**Archivo**: [simple_topo_containers2.py](https://github.com/tigarto/2018-1/blob/master/ensayo1/test4/simple_topo_containers2.py)
+
+**Uso**: Con una sola consola que se abra para este caso, es suficiente.
+
+* **Controlador y red**: 
+
+```
+./sudo python simple_topo_containers2.py
+```
 
 ## Apendice
 
 **Algunos comandos de test en containernet**:
+
 ```
 nodes
 net
@@ -183,7 +244,6 @@ xterm h3
 pingall
 h1 ping -c 2 h2
 ```
-
 
 **Comandos docker a la mano**:
 
