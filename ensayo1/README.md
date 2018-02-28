@@ -193,7 +193,7 @@ h1 --- s1 --- h3
 
 Todos los 3 host (h1, h2 y h3) usan containers cuyas imagenes provienen del [Dockerfile](https://github.com/tigarto/2018-1/blob/master/ensayo1/Dockerfile) el cual esta basado en ubuntu pero que tiene instaladas herramientas de red para poder hacer pruebas como el ping. La imagen se puede encontrar como ubuntu_net_tools cuando se digita el comando ```sudo docker images```.
 
-**Directorio con los ejemplos**: [test3](https://github.com/tigarto/2018-1/tree/master/ensayo1/test4)
+**Directorio con los ejemplos**: [test4](https://github.com/tigarto/2018-1/tree/master/ensayo1/test4)
 
 **Resumen**:
 Usando mininet montar una topologia sencilla de 3 contenedores (que corren una imagen de ubuntu) conectados a un mismo switch. Esta red usara POX (el cual funcionara como switch) como controlador. Para el caso, como la topologia es bastante sencilla se describen las 3 formas como se llevo a cabo la acción.
