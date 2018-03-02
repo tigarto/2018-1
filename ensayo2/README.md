@@ -139,6 +139,39 @@ docker network rm my-red
 
 **Respuesta**: Si
 
+
+#### Pregunta 4
+
+¿Que sucede cuando los contenedores estan ejecutandose desde mininet?, ¿Acaso los ve cAdvisor?
+
+Inicialmente vamos a correr el siguiente [script de python](https://github.com/tigarto/2018-1/blob/master/ensayo1/test4/simple_topo_containers2.py). Para ello lo que hacemos es:
+
+```
+sudo python simple_topo_containers2.py
+```
+
+Luego llamamos el cAdvisor
+
+```
+sudo docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:rw \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  google/cadvisor:latest
+```
+
+Finalmente verificamos la informacion asociada con diferentes comandos y containers:
+
+```
+sudo docker containers ls
+sudo docker network ls
+```
+
 ## Comandos utiles
 
 > **Para containers**
@@ -150,6 +183,9 @@ docker network rm my-red
 > 2. docker network inspect RED
 > 3. docker network create RED
 > 4. docker network rm RED
+
+## Nota:
+* Puede que sea necesario ver algunos ensayos de los que se hicieron de ultimo.
 
 ## Referencias
  
