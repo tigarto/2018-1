@@ -132,6 +132,8 @@ sudo docker run \
 Aun se seguia viendo en el cadvisor por lo que se elimino.
 
 ```
+sudo docker network inspect my-red
+sudo docker network ls
 docker network rm my-red
 ```
 
