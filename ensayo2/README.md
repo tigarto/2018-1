@@ -170,7 +170,17 @@ Finalmente verificamos la informacion asociada con diferentes comandos y contain
 ```
 sudo docker containers ls
 sudo docker network ls
+sudo  ovs-vsctl show
+sudo docker network inspect bridge
 ```
+
+Mirando ahora las cosas desde la interfaz web de cAdvisor tenemos:
+
+```
+http://localhost:8080/containers/docker
+```
+
+**Respuesta**: Si, no hay aislamiento, el mero hecho de correr un container hace que este exista a la luz de cAdvisor.
 
 ## Comandos utiles
 
@@ -188,7 +198,12 @@ sudo docker network ls
 * Puede que sea necesario ver algunos ensayos de los que se hicieron de ultimo.
 
 ## Referencias
- 
+* [son-emu](https://github.com/sonata-nfv/son-emu/wiki)
+* [Containernet and SONATA Emulator Demo](https://github.com/sonata-nfv/son-tutorials/blob/master/upb-containernet-emulator-summerschool-demo/README.md)
+* [http://www.nectechnologies.in/en_TI/pdf/NTI_whitepaper_SDN_NFV.pdf](http://www.nectechnologies.in/en_TI/pdf/NTI_whitepaper_SDN_NFV.pdf)
+* [Open vSwitch Cheat Sheet](http://therandomsecurityguy.com/openvswitch-cheat-sheet/)
+* [Introduction to Managing OVS Bridges](https://fatmin.com/2016/02/09/introduction-to-managing-ovs-bridges/)
+* [OVS Commands Reference](http://www.pica8.com/document/v2.3/html/ovs-commands-reference/)
 * [Monitoring and debugging using an SDK for NFV-powered telecom applications](https://biblio.ugent.be/publication/8521281/file/8521284.pdf)
 * [Monitoring Docker Containers – docker stats, cAdvisor, Universal Control Plane](https://blog.couchbase.com/monitoring-docker-containers-docker-stats-cadvisor-universal-control-plane/)
 * [Monitoring Docker Swarm with cAdvisor, InfluxDB and Grafana](tps://botleg.com/stories/monitoring-docker-swarm-with-cadvisor-influxdb-and-grafana/)
