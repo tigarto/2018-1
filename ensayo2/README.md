@@ -139,11 +139,11 @@ docker network rm my-red
 
 ## Comandos utiles
 
-> ** Para containers **
+> **Para containers**
 > 1. sudo docker images
 > 2. sudo docker containers ls
 >
-> ** Para redes **
+> **Para redes**
 > 1. sudo docker network ls
 > 2. docker network inspect RED
 > 3. docker network create RED
