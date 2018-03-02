@@ -16,7 +16,12 @@ Se van a manejar varios contenedores que van a servir como hosts, asi mismo se v
 
 ### Caso 1: 
 
-* **Contenedores**: h1, h2, cadvisor (empleado para monitoreo)
+### Contenedores
+
+Los contenedores que se ejecutan son:
+* h1
+* h2
+* cadvisor (empleado para monitoreo)
 
 **h1**
 
@@ -53,9 +58,96 @@ sudo docker run \
   google/cadvisor:latest
 ```
 
+### Verificando la red
+
+```
+sudo docker network ls
+sudo docker network inspect bridge
+```
+
+Del ultimo comando se observo que los containers estan conectados a la misma red con las siguiente IPs:
+
+| Container  | Second Header |
+| ------------- | ------------- |
+| h1  | 172.17.0.2  |
+| h2  | 172.17.0.3  |
+| cadvisor  | 172.17.0.4  |
+
+### Monitoreando los containers
+
+Una vez cAdvisor esta corriendo lo que se hace es colocar la siguiente URL en el navegador: localhost:8080, una vez hecho esto se podra observar toda la informacion asociada.
+
+### Preguntas:
+
+#### Pregunta 1  
+¿Si se coloco un container conectado a host y no a bridge (opcion por defecto), aparecera en cAdvisor?
+
+```
+sudo docker run \
+  --rm \
+  --network=host \
+  --name=h_net_host \
+  --hostname h_net_host \
+  -ti ubuntu:trusty /bin/bash
+```
+
+**Respuesta**: Si
+
+#### Pregunta 2 
+¿Si se coloco un container conectado a none y no a bridge (opcion por defecto), aparecera en cAdvisor?
+
+```
+sudo docker run \
+  --rm \
+  --network=none \
+  --name=h_none_host \
+  --hostname h_none_host \
+  -ti ubuntu:trusty /bin/bash
+```
+
+**Respuesta**: Si
+
+
+#### Pregunta 3
+
+Si creo otra red nueva, tipo bridge, distinta de donde esta cAdvisor y concecto aqui el nuevo container se ve en cAdvisor?  
+
+Se creo la red **my-net**:
+```
+docker network create my-net
+sudo docker network ls
+```
+
+Se creo el container y se engancho a esta nueva red:
+
+```
+sudo docker run \
+  --rm \
+  --network=my-net \
+  --name=h_my-net_host \
+  --hostname h_my-net_host \
+  -ti ubuntu:trusty /bin/bash
+```
+
+Aun se seguia viendo en el cadvisor por lo que se elimino.
+
+```
+docker network rm my-red
+```
+
+**Respuesta**: Si
+
 ## Comandos utiles
 
-`
+> ** Para containers **
+> 1. sudo docker images
+> 2. sudo docker containers ls
+>
+> ** Para redes **
+> 1. sudo docker network ls
+> 2. docker network inspect RED
+> 3. docker network create RED
+> 4. docker network rm RED
 
 ## Referencias
  
