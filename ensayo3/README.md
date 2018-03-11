@@ -51,5 +51,52 @@ cd ~/son-emu/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 ```
 
+### 2.3. Instalacion del editor
+
+Otro componente clave de sonata es el **son-editor-backend**; para mas informacion sobre este, puede consultar el siguiente [enlace](https://github.com/sonata-nfv/son-editor-backend). En dicho enlace, se encuentran las instrucciones para llevar a cabo la instalacion, conviene tener en cuenta que se debe tener la certeza de que ya se tiene **docker-compose** instalado, si no es asi puede hacerlo mediante y probar la instalacion mediante los siguientes comandos:
+
+```
+sudo pip install docker-compose
+sudo docker-compose --version
+sudo docker-compose --help
+```
+
+Lo que resta es seguir las instrucciones de instalacion que se dan en la [pagina](https://github.com/sonata-nfv/son-editor-backend) de son-editor.
+
+1. Autenticarse tal y como alli se explica. Para nuestro caso:
+   * Application name: SONATA Editor
+   * URL of your installation: http://localhost/
+   * Authentication callback URL: http://localhost/backend/login
+   
+![fig1](./install_editor1.png)
+**Figura 1**. Llenando los datos de autenticacion.
+
+2. Cuando se guarda se generan dos codigos ClientID y ClientSecret los cuales de necesitan al momento de editar el archivo **config.yaml**.
+
+3. A continuacion se muestran los comandos realizados antes de modificar el config.yaml:
+
+```
+cd $HOME
+git clone https://github.com/sonata-nfv/son-editor-backend
+cd son-editor-backend/
+```
+
+4. Se edita **config.yaml** con los numeros generados en 2.
+5. Finalmente se ejecuta el comando:
+
+```
+sudo docker-compose up
+```
+
+6. Se habre el browser en **http://localhost/** y se procede al logeo con la cuenta de github.
+
+![fig2](./install_editor5.png)
+**Figura 2**. Logueo.
+
+7. Si todo sale como se espera este sera el resultado:
+
+![fig3](./install_editor6.png)
+**Figura 3**. Interfa sonata.
+
 
 
