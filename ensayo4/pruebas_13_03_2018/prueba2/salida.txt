@@ -1,0 +1,221 @@
+# 0. download test container images used for the examples
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_13_03_2018/prueba2$ sudo docker images
+REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
+soneditorbackend_son-editor   latest              1eb550e846b5        2 days ago          1.16GB
+ubuntu                        trusty              a35e70164dfb        6 days ago          222MB
+ubuntu_net_tools              latest              1b1e461a3fe2        2 weeks ago         214MB
+<none>                        <none>              0d5d28a7f062        2 weeks ago         214MB
+sonatanfv/sonata-stress-vnf   latest              14ec4f40fd94        2 weeks ago         154MB
+sonatanfv/sonata-iperf3-vnf   latest              fa9904333613        2 weeks ago         298MB
+sonatanfv/sonata-empty-vnf    latest              62dbb712e174        2 weeks ago         157MB
+tiangolo/uwsgi-nginx-flask    flask-python3.5     c54ff21bb240        5 weeks ago         712MB
+ubuntu                        latest              0458a4468cbc        6 weeks ago         112MB
+ubuntu                        <none>              dc4491992653        6 weeks ago         222MB
+google/cadvisor               latest              75f88e3ec333        3 months ago        62.2MB
+
+
+docker pull sonatanfv/sonata-snort-ids-vnf
+
+
+Step-by-step example:
+
+# 1. (Terminal1) start the demo topology
+sudo python sonata_y1_demo_topology_1.py
+
+# Terminal1 output
+...
+*** Cleanup complete.
+DEBUG:dcemulator.net:starting ryu-controller with /usr/local/lib/python2.7/dist-packages/emuvim-1.0-py2.7.egg/emuvim/dcemulator/son_emu_simple_switch_13.py
+DEBUG:dcemulator.net:starting ryu-controller with /usr/local/lib/python2.7/dist-packages/ryu/app/ofctl_rest.py
+Connecting to remote controller at 127.0.0.1:6653
+INFO:resourcemodel:Resource model registrar created with dc_emulation_max_cpu=1.0 and dc_emulation_max_mem=512
+DEBUG:dcemulator.node:created data center switch: dc1.s1
+INFO:dcemulator.net:added data center: dc1
+DEBUG:dcemulator.node:created data center switch: dc2.s1
+INFO:dcemulator.net:added data center: dc2
+(10ms delay) (10ms delay) (10ms delay) (10ms delay) DEBUG:dcemulator.net:addLink: n1=dc1.s1 intf1=dc1.s1-eth1 -- n2=s1 intf2=s1-eth1
+(20ms delay) (20ms delay) (20ms delay) (20ms delay) DEBUG:dcemulator.net:addLink: n1=dc2.s1 intf1=dc2.s1-eth1 -- n2=s1 intf2=s1-eth2
+*** Configuring hosts
+
+*** Starting controller
+c0 
+*** Starting 3 switches
+dc1.s1 (10ms delay) dc2.s1 (20ms delay) s1 (10ms delay) (20ms delay) ...(10ms delay) (20ms delay) (10ms delay) (20ms delay) 
+*** Starting CLI:
+containernet> 
+
+
+-----
+
+cd ~/son-editor-backend/
+sudo docker-compose up
+
+http://localhost/
+
+
+
+
+# 2. (Terminal2) push empty service package to dummy gatekeeper
+curl -i -X POST -F package=@sonata-empty-service.son http://127.0.0.1:5000/packages
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+OLVIDEMOS MOMENTANEAMENTE LO ANTERIOR Y VEAMOS EL SIGUIENTE EJEMPLO
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Ojo: antes toco modificar la instalacion del docker empleado.
+
+sudo pip install docker==2.0.2
+
+
+///////
+
+https://github.com/sonata-nfv/son-emu
+
+This simple example shows how to start the emulator with a simple topology (terminal 1) and how to start (terminal 2) some empty VNF containers in the emulated datacenters (PoPs) by using the son-emu-cli.
+
+First terminal (start the emulation platform):
+sudo python simple_topology.py
+    
+Second terminal:
+son-emu-cli compute start -d datacenter1 -n vnf1
+son-emu-cli compute start -d datacenter1 -n vnf2
+son-emu-cli compute list
+
+First terminal:
+containernet> vnf1 ifconfig
+containernet> vnf1 ping -c 2 vnf2
+
+Salidas:
+
+sudo python simple_topology.py
+
+Se estan teniendo problemas para manejar lo del son-emu-cli, parecen de compatibilidad
+
+sudo pip install docker==2.0.2
+
+
+ahora si parece que salio algo:
+
+son-emu-cli compute start -d datacenter1 -n vnf1
+
+
+sudo son-emu-cli compute start -d datacenter1 -n vnf1
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'datacenter1',
+    u'docker_network': u'172.17.0.2',
+    u'flavor_name': u'tiny',
+    u'hostname': u'vnf1',
+    u'id': u'd9bbb4f4835fe6f4b4b70685cabf35f39b90871c6d8610abe60e9ce46b124763',
+    u'image': u'ubuntu:trusty',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'vnf1',
+    u'network': [   {   u'dc_portname': u'dc1.s1-eth3',
+                        u'intf_name': u'vnf1-eth0',
+                        u'ip': u'10.0.0.2/8',
+                        u'mac': u'46:0f:71:d1:eb:a5',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'd9bbb4f4835f',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 9508,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-13T22:27:47.653391942Z',
+                  u'Status': u'running'}}
+
+
+son-emu-cli compute start -d datacenter1 -n vnf2
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'datacenter1',
+    u'docker_network': u'172.17.0.3',
+    u'flavor_name': u'tiny',
+    u'hostname': u'vnf2',
+    u'id': u'58187e843bb833fcbcc9c1760aee57ac5424c48c247f98f4cd54a2d234e37c12',
+    u'image': u'ubuntu:trusty',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'vnf2',
+    u'network': [   {   u'dc_portname': u'dc1.s1-eth4',
+                        u'intf_name': u'vnf2-eth0',
+                        u'ip': u'10.0.0.4/8',
+                        u'mac': u'd6:ad:92:f9:d8:f9',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'58187e843bb8',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 9732,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-13T22:28:40.837419413Z',
+                  u'Status': u'running'}}
+
+son-emu-cli compute list
++--------------+-------------+---------------+------------------+-------------------------+
+| Datacenter   | Container   | Image         | Interface list   | Datacenter interfaces   |
++==============+=============+===============+==================+=========================+
+| datacenter1  | vnf2        | ubuntu:trusty | vnf2-eth0        | dc1.s1-eth4             |
++--------------+-------------+---------------+------------------+-------------------------+
+| datacenter1  | vnf1        | ubuntu:trusty | vnf1-eth0        | dc1.s1-eth3             |
++--------------+-------------+---------------+------------------+-------------------------+
+
+containernet> vnf1 ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02  
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:29 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:4152 (4.1 KB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+vnf1-eth0 Link encap:Ethernet  HWaddr 46:0f:71:d1:eb:a5  
+          inet addr:10.0.0.2  Bcast:10.255.255.255  Mask:255.0.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:33 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:4884 (4.8 KB)  TX bytes:0 (0.0 B)
+
+
+containernet> vnf1 ping -c 2 vnf2
+PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
+64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=7.55 ms
+64 bytes from 10.0.0.4: icmp_seq=2 ttl=64 time=0.054 ms
+
+--- 10.0.0.4 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.054/3.805/7.556/3.751 ms
+
+
+
+
+
