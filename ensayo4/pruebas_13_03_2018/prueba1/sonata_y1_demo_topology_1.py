@@ -31,23 +31,12 @@ A simple topology with two PoPs for the y1 demo story board.
         (dc1) <<-->> s1 <<-->> (dc2)
 """
 
-"""
-EDityn python pat
-"""
-
-import sys
-#sys.path.append("/home/osboxes/son-emu/src/emuvim/dcemulator")
-#print(sys.path)
 import logging
-from mininet.node import RemoteController
 from mininet.log import setLogLevel
-from emuvim.dcemulator.net import DCNetwork
-from emuvim.api.sonata import SonataDummyGatekeeperEndpoint
-"""
 from emuvim.dcemulator.net import DCNetwork
 from emuvim.api.rest.rest_api_endpoint import RestApiEndpoint
 from emuvim.api.sonata import SonataDummyGatekeeperEndpoint
-
+from mininet.node import RemoteController
 
 logging.basicConfig(level=logging.INFO)
 
@@ -90,5 +79,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-"""

@@ -1,0 +1,196 @@
+osboxes@osboxes:~$ sudo docker images
+[sudo] password for osboxes: 
+REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
+soneditorbackend_son-editor   latest              1eb550e846b5        2 days ago          1.16GB
+ubuntu                        trusty              a35e70164dfb        6 days ago          222MB
+ubuntu_net_tools              latest              1b1e461a3fe2        2 weeks ago         214MB
+<none>                        <none>              0d5d28a7f062        2 weeks ago         214MB
+sonatanfv/sonata-stress-vnf   latest              14ec4f40fd94        2 weeks ago         154MB
+sonatanfv/sonata-iperf3-vnf   latest              fa9904333613        2 weeks ago         298MB
+sonatanfv/sonata-empty-vnf    latest              62dbb712e174        2 weeks ago         157MB
+tiangolo/uwsgi-nginx-flask    flask-python3.5     c54ff21bb240        5 weeks ago         712MB
+ubuntu                        latest              0458a4468cbc        6 weeks ago         112MB
+ubuntu                        <none>              dc4491992653        6 weeks ago         222MB
+google/cadvisor               latest              75f88e3ec333        3 months ago        62.2MB
+
+
+# 1. (Terminal1) start the demo topology
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_13_03_2018/prueba1$ ls
+sonata_y1_demo_topology_1.py
+
+sudo python sonata_y1_demo_topology_1.py
+
+# Output in Terminal1
+...
+*** Cleanup complete.
+DEBUG:dcemulator.net:starting ryu-controller with /usr/local/lib/python2.7/dist-packages/emuvim-1.0-py2.7.egg/emuvim/dcemulator/son_emu_simple_switch_13.py
+DEBUG:dcemulator.net:starting ryu-controller with /usr/local/lib/python2.7/dist-packages/ryu/app/ofctl_rest.py
+Unable to contact the remote controller at 127.0.0.1:6653
+Unable to contact the remote controller at 127.0.0.1:6633
+Setting remote controller to 127.0.0.1:6653
+INFO:resourcemodel:Resource model registrar created with dc_emulation_max_cpu=1.0 and dc_emulation_max_mem=512
+DEBUG:dcemulator.node:created data center switch: dc1.s1
+INFO:dcemulator.net:added data center: dc1
+DEBUG:dcemulator.node:created data center switch: dc2.s1
+INFO:dcemulator.net:added data center: dc2
+(10ms delay) (10ms delay) (10ms delay) (10ms delay) DEBUG:dcemulator.net:addLink: n1=dc1.s1 intf1=dc1.s1-eth1 -- n2=s1 intf2=s1-eth1
+(20ms delay) (20ms delay) (20ms delay) (20ms delay) DEBUG:dcemulator.net:addLink: n1=dc2.s1 intf1=dc2.s1-eth1 -- n2=s1 intf2=s1-eth2
+*** Configuring hosts
+
+*** Starting controller
+c0 
+*** Starting 3 switches
+dc1.s1 (10ms delay) dc2.s1 (20ms delay) s1 (10ms delay) (20ms delay) ...(10ms delay) (20ms delay) (10ms delay) (20ms delay) 
+*** Starting CLI:
+containernet> nodes
+available nodes are: 
+c0 dc1.s1 dc2.s1 s1
+containernet> net
+dc1.s1 lo:  dc1.s1-eth1:s1-eth1
+dc2.s1 lo:  dc2.s1-eth1:s1-eth2
+s1 lo:  s1-eth1:dc1.s1-eth1 s1-eth2:dc2.s1-eth1
+c0
+containernet> 
+
+
+
+# 2. (Terminal2) add start two containers in dc2
+son-emu-cli compute start -d dc1 -n client -i sonatanfv/sonata-empty-vnf
+
+# Output in Terminal2
+
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'dc1',
+    u'docker_network': u'172.17.0.2',
+    u'flavor_name': u'tiny',
+    u'hostname': u'client',
+    u'id': u'414f28cc457181bf644d287b1b234d4e80c6fb0991f402c10bdc5aedeea79697',
+    u'image': u'sonatanfv/sonata-empty-vnf',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'client',
+    u'network': [   {   u'dc_portname': u'dc1.s1-eth2',
+                        u'intf_name': u'client-eth0',
+                        u'ip': u'10.0.0.2/8',
+                        u'mac': u'76:06:79:04:df:b4',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'414f28cc4571',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 4579,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-13T21:06:28.685316492Z',
+                  u'Status': u'running'}}
+
+
+
+son-emu-cli compute start -d dc2 -n server -i sonatanfv/sonata-empty-vnf
+
+# Output in Terminal2
+
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'dc2',
+    u'docker_network': u'172.17.0.3',
+    u'flavor_name': u'tiny',
+    u'hostname': u'server',
+    u'id': u'c7d56553338ad379ee25d45a1856d637795937ae55e6df48d8a8836c42913cdc',
+    u'image': u'sonatanfv/sonata-empty-vnf',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'server',
+    u'network': [   {   u'dc_portname': u'dc2.s1-eth2',
+                        u'intf_name': u'server-eth0',
+                        u'ip': u'10.0.0.4/8',
+                        u'mac': u'66:bc:c9:37:65:60',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'c7d56553338a',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 4801,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-13T21:07:12.96200137Z',
+                  u'Status': u'running'}}
+
+
+# 3. (Terminal2) do the chain setup
+
+son-emu-cli network add -b -src client:client-eth0 -dst server:server-eth0
+
+# Output in Terminal2
+
+"success: add-flow between client and server with options: {
+ "priority": "1000", 
+ "path": [
+  "dc1.s1", 
+  "s1", 
+  "dc2.s1"
+ ], 
+ "vlan": 1, 
+ "cookie": "10", 
+ "match_input": null
+}
+success: add-flow between server and client with options: {
+ "priority": "1000", 
+ "path": [
+  "dc2.s1", 
+  "s1", 
+  "dc1.s1"
+ ], 
+ "vlan": 2, 
+ "cookie": "10", 
+ "match_input": null
+}"
+
+
+# 4. (Terminal1) check if everything works
+
+# Output in Terminal1
+
+containernet> client ping -c2 server
+PING 10.0.0.4 (10.0.0.4): 56 data bytes
+64 bytes from 10.0.0.4: icmp_seq=0 ttl=64 time=132.875 ms
+64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=61.517 ms
+--- 10.0.0.4 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 61.517/97.196/132.875/35.679 ms
+
+
+# 5. (Terminal1) shutdown the emulator
+containernet> exit
+
+Unhandled exception in thread started by <bound method Thread.__bootstrap of <Thread(Thread-2, stopped daemon 139849590904576)>>
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 774, in __bootstrap
+    self.__bootstrap_inner()
+  File "/usr/lib/python2.7/threading.py", line 814, in __bootstrap_inner
+    (self.name, _format_exc()))
+  File "/usr/lib/python2.7/traceback.py", line 241, in format_exc
+    etype, value, tb = sys.exc_info()
+AttributeError: 'NoneType' object has no attribute 'exc_info'
+
+
+
+
