@@ -53,6 +53,24 @@ containernet> exit
 ```
 
 ### Resultados de la aplicacion de las instrucciones
-
-
+> 1. **Terminal 1**
+>```
+>
+>sudo python sonata_y1_demo_topology_1.py
+> ...
+>*** Starting controller
+>c0 
+>*** Starting 3 switches
+>dc1.s1 (10ms delay) dc2.s1 (20ms delay) s1 (10ms delay) (20ms delay) ...(10ms delay) (20ms delay) (10ms delay) (20ms delay) 
+>*** Starting CLI:
+>containernet> nodes
+>available nodes are: 
+>c0 dc1.s1 dc2.s1 s1
+>containernet> net
+>dc1.s1 lo:  dc1.s1-eth1:s1-eth1
+>dc2.s1 lo:  dc2.s1-eth1:s1-eth2
+>s1 lo:  s1-eth1:dc1.s1-eth1 s1-eth2:dc2.s1-eth1
+>c0
+>containernet> 
+>```
 
