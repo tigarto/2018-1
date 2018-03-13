@@ -1,0 +1,81 @@
+
+
+
+Instalacion del emu-cli
+
+
+Antes: 
+sudo apt-get install python3.4 (Hay posibles problemas por lo que vamos a correr el riesgo con python3.5)
+
+
+
+
+cd /home/osboxes
+sudo pip install virtualenvwrapper
+
+export WORKON_HOME=~/Envs
+mkdir -p $WORKON_HOME
+source /usr/local/bin/virtualenvwrapper.sh
+mkvirtualenv env1
+
+
+Ya en la nueva (env)
+ls $WORKON_HOME
+
+(env) pip install django
+(env) lssitepackages
+
+
+(env1) osboxes@osboxes:~$ lssitepackages
+django                    pip-9.0.1.dist-info    setuptools-38.5.2.dist-info
+Django-1.11.11.dist-info  pkg_resources          wheel
+easy_install.py           pytz                   wheel-0.30.0.dist-info
+easy_install.pyc          pytz-2018.3.dist-info
+pip                       setuptools
+
+
+
+mkvirtualenv -p /usr/bin/python34 sonata
+
+
+Comando:
+mkvirtualenv -p /usr/bin/python3 sonata
+ls $WORKON_HOME
+
+(sonata) osboxes@osboxes:~$  Ya se esta en el virtual home de sonata
+git clone git@github.com:sonata-nfv/son-cli.git (toco bajarlo y descomprimirlo)
+cd son-cli/
+bin/buildout
+
+error, se instento pip install pycripto
+
+
+solucion: sudo apt-get install python3-dev
+
+otra vez: bin/buildout
+
+
+Se ejecuto y todo bien. Depronto la unica novedad fue haceer dos cosas.
+1. Actualizar el .profile del root y el otro usuario.
+
+# Adding de PYTHONPATH (13/03/2018)
+export PYTHONPATH=$PYTHONPATH:/home/osboxes/son-emu/src:/home/osboxes/son-emu/
+
+
+2. cd son-emu
+   sudo python setup.py install
+
+
+Con esto se instalo son-emu-cli
+
+
+osboxes@osboxes:~$ sudo docker ps
+[sudo] password for osboxes: 
+CONTAINER ID        IMAGE                        COMMAND             CREATED             STATUS              PORTS               NAMES
+1f82a240a5c4        sonatanfv/sonata-empty-vnf   "/bin/bash"         13 minutes ago      Up 13 minutes                           mn.server
+d368865eb8cc        sonatanfv/sonata-empty-vnf   "/bin/bash"         15 minutes ago      Up 15 minutes                           mn.client
+
+
+
+
+
