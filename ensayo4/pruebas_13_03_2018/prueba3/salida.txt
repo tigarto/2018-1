@@ -424,6 +424,18 @@ ssh_exchange_identification: Connection closed by remote host
 .... dejemoslo pa despues, por ahora dediquemosno a socumentar la salida
 
 
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_13_03_2018/prueba3/son-examples/service-projects$ ls
+pack.sh                    sonata-fw-service-emu            sonata-ovs-service-emu       sonata-snort-service-emu       sonata-vtc-service-sp
+README.md                  sonata-fw-service-sp             sonata-ovs-user-service-emu  sonata-snort-service.son
+sonata-demo                sonata-fw-vtc-service-emu        sonata-proxy-lb-service-emu  sonata-stress-service-emu
+sonata-empty-service-emu   sonata-fw-vtc-service-sp         sonata-rubik-service-sp      sonata-vtc-private-service-sp
+sonata-fw-dpi-service-emu  sonata-fw-vtc-service-update-sp  sonata-sdk-test-service-emu  sonata-vtc-service-emu
+
+
+
+
+
+
 Packaging
 
 The given example projects can be packed with the son-cli tools:
