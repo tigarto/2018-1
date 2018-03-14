@@ -74,3 +74,82 @@ containernet> exit
 >containernet> 
 >```
 
+> 2. **Terminal 2**
+>```
+>son-emu-cli compute start -d dc1 -n client -i sonatanfv/sonata-empty-vnf
+>{   u'cpu_period': None,
+>    u'cpu_quota': -1,
+>    u'cpu_shares': None,
+>    u'cpuset': None,
+>    u'datacenter': u'dc1',
+>    u'docker_network': u'172.17.0.2',
+>    u'flavor_name': u'tiny',
+>    u'hostname': u'client',
+>    u'id': u'414f28cc457181bf644d287b1b234d4e80c6fb0991f402c10bdc5aedeea79697',
+>    u'image': u'sonatanfv/sonata-empty-vnf',
+>    u'mem_limit': None,
+>    u'memswap_limit': None,
+>    u'name': u'client',
+>    u'network': [   {   u'dc_portname': u'dc1.s1-eth2',
+>                        u'intf_name': u'client-eth0',
+>                        u'ip': u'10.0.0.2/8',
+>                        u'mac': u'76:06:79:04:df:b4',
+>                        u'netmask': u'8',
+>                        u'status': u'OK',
+>                        u'up': True,
+>                        u'vlan': None}],
+>    u'short_id': u'414f28cc4571',
+>    u'state': {   u'Dead': False,
+>                  u'Error': u'',
+>                  u'ExitCode': 0,
+>                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+>                  u'OOMKilled': False,
+>                  u'Paused': False,
+>                  u'Pid': 4579,
+>                  u'Restarting': False,
+>                  u'Running': True,
+>                  u'StartedAt': u'2018-03-13T21:06:28.685316492Z',
+>                  u'Status': u'running'}}
+>
+>```
+>
+>```
+>son-emu-cli compute start -d dc2 -n server -i sonatanfv/sonata-empty-vnf
+>{   u'cpu_period': None,
+>    u'cpu_quota': -1,
+>    u'cpu_shares': None,
+>    u'cpuset': None,
+>    u'datacenter': u'dc2',
+>    u'docker_network': u'172.17.0.3',
+>    u'flavor_name': u'tiny',
+>    u'hostname': u'server',
+>    u'id': u'c7d56553338ad379ee25d45a1856d637795937ae55e6df48d8a8836c42913cdc',
+>    u'image': u'sonatanfv/sonata-empty-vnf',
+>    u'mem_limit': None,
+>    u'memswap_limit': None,
+>    u'name': u'server',
+>    u'network': [   {   u'dc_portname': u'dc2.s1-eth2',
+>                        u'intf_name': u'server-eth0',
+>                        u'ip': u'10.0.0.4/8',
+>                        u'mac': u'66:bc:c9:37:65:60',
+>                        u'netmask': u'8',
+>                        u'status': u'OK',
+>                        u'up': True,
+>                        u'vlan': None}],
+>    u'short_id': u'c7d56553338a',
+>    u'state': {   u'Dead': False,
+>                  u'Error': u'',
+>                  u'ExitCode': 0,
+>                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+>                  u'OOMKilled': False,
+>                  u'Paused': False,
+>                  u'Pid': 4801,
+>                  u'Restarting': False,
+>                  u'Running': True,
+>                  u'StartedAt': u'2018-03-13T21:07:12.96200137Z',
+>                  u'Status': u'running'}}
+>```
+>
+>```
+> x
+>```
