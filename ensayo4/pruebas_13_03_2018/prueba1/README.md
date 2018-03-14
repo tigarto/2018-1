@@ -112,7 +112,7 @@ containernet> exit
 >                  u'Status': u'running'}}
 >
 >```
->
+> 
 >```
 >son-emu-cli compute start -d dc2 -n server -i sonatanfv/sonata-empty-vnf
 >{   u'cpu_period': None,
@@ -150,6 +150,47 @@ containernet> exit
 >                  u'Status': u'running'}}
 >```
 >
+> 3. **Terminal 2**
+> 
 >```
-> x
+>son-emu-cli network add -b -src client:client-eth0 -dst server:server-eth0
+>"success: add-flow between client and server with options: {
+> "priority": "1000", 
+> "path": [
+>  "dc1.s1", 
+>  "s1", 
+>  "dc2.s1"
+> ], 
+> "vlan": 1, 
+> "cookie": "10", 
+> "match_input": null
+>}
+>success: add-flow between server and client with options: {
+> "priority": "1000", 
+> "path": [
+>  "dc2.s1", 
+>  "s1", 
+>  "dc1.s1"
+> ], 
+> "vlan": 2, 
+> "cookie": "10", 
+> "match_input": null
+>}"
 >```
+
+> 4. **Terminal 1**
+> ```
+> containernet> client ping -c2 server
+> PING 10.0.0.4 (10.0.0.4): 56 data bytes
+> 64 bytes from 10.0.0.4: icmp_seq=0 ttl=64 time=132.875 ms
+> 64 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=61.517 ms
+> --- 10.0.0.4 ping statistics ---
+> 2 packets transmitted, 2 packets received, 0% packet loss
+> round-trip min/avg/max/stddev = 61.517/97.196/132.875/35.679 ms
+> ```
+> 
+> 5. **Terminal 1**
+> 
+> ```
+> containernet> exit
+> ```
