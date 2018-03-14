@@ -50,18 +50,19 @@ git clone https://github.com/sonata-nfv/son-emu.git
 cd ~/son-emu/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 ```
-
-Una vez hecho lo anterior realizar las siguientes 2 tareas:
-1. Configurar el PYTHONPATH para agregar las librerias propias del emulador al espacio de busqueda para libreriras propio de python, para ello se modificaron los archivos **.profile** tanto del usuario normal como del usuario root agregado la linea ```export PYTHONPATH=$PYTHONPATH:/home/osboxes/son-emu/src:/home/osboxes/son-emu/```, la cual hace referencia a los lugares de busqueda.
-Para el caso del root se edito el archivo ```/root/.profile```, y para el caso del usuario normal se editor archivo ```/home/<USUARIO>/.profile``` agregando la linea en cuestion. Despues de realizar el procedimiento se procedio a reiniciar la maquina para que los cambios tuvieran efecto.
-2. Adicionalmente, es bueno tener el interprete de comandos del emulador (son-emu-cli), para ello dentro del directorio de **son-emu** se procedio a ejecutar el comando de instalacion del script:
-
-```
-cd
-cd son-emu
-sudo python setup.py install
-```
-
+>
+>**Configuracion adicional**: esta se llevo a cabo de ensayo y error (Fecha 13/03/2018)
+>Una vez hecho lo anterior realizar las siguientes 2 tareas:
+>1. Configurar el PYTHONPATH para agregar las librerias propias del emulador al espacio de busqueda para libreriras propio de python, >para ello se modificaron los archivos **.profile** tanto del usuario normal como del usuario root agregado la linea ```export >PYTHONPATH=$PYTHONPATH:/home/osboxes/son-emu/src:/home/osboxes/son-emu/```, la cual hace referencia a los lugares de busqueda.
+>Para el caso del root se edito el archivo ```/root/.profile```, y para el caso del usuario normal se editor archivo >```/home/<USUARIO>/.profile``` agregando la linea en cuestion. Despues de realizar el procedimiento se procedio a reiniciar la maquina >para que los cambios tuvieran efecto.
+>2. Adicionalmente, es bueno tener el interprete de comandos del emulador (son-emu-cli), para ello dentro del directorio de **son-emu** >se procedio a ejecutar el comando de instalacion del script:
+>
+>```
+>cd
+>cd son-emu
+>sudo python setup.py install
+>```
+>
 ### 2.3. Instalacion del editor
 
 Otro componente clave de sonata es el **son-editor-backend**; para mas informacion sobre este, puede consultar el siguiente [enlace](https://github.com/sonata-nfv/son-editor-backend). En dicho enlace, se encuentran las instrucciones para llevar a cabo la instalacion, conviene tener en cuenta que se debe tener la certeza de que ya se tiene **docker-compose** instalado, si no es asi puede hacerlo mediante y probar la instalacion mediante los siguientes comandos:
