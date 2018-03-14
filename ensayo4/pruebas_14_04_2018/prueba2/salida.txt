@@ -432,6 +432,138 @@ osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ ssh serve
 
 Hasta aqui llegue esta vez
 
+containernet> server iperf3 -s &
+-----------------------------------------------------------
+Server listening on 5201
+
+***
+containernet> client iperf3 -c 10.0.0.8 -t 10
+Connecting to host 10.0.0.8, port 5201
+[  4] local 10.0.0.6 port 55820 connected to 10.0.0.8 port 5201
+[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+[  4]   0.00-1.00   sec   538 MBytes  4.52 Gbits/sec  416   1.08 MBytes       
+[  4]   1.00-2.00   sec   344 MBytes  2.88 Gbits/sec  572    649 KBytes       
+[  4]   2.00-3.00   sec   268 MBytes  2.24 Gbits/sec    0    725 KBytes       
+[  4]   3.00-4.00   sec   649 MBytes  5.45 Gbits/sec  149    788 KBytes       
+[  4]   4.00-5.00   sec  1.17 GBytes  10.1 Gbits/sec    0    850 KBytes       
+[  4]   5.00-6.00   sec  1.34 GBytes  11.5 Gbits/sec    0    943 KBytes       
+[  4]   6.00-7.00   sec  1.18 GBytes  10.2 Gbits/sec    0   1022 KBytes       
+[  4]   7.00-8.00   sec  1.13 GBytes  9.68 Gbits/sec    0   1.03 MBytes       
+[  4]   8.00-9.00   sec  1.05 GBytes  9.01 Gbits/sec  343   1004 KBytes       
+[  4]   9.00-10.00  sec  1.00 GBytes  8.60 Gbits/sec    0   1005 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Retr
+[  4]   0.00-10.00  sec  8.63 GBytes  7.41 Gbits/sec  1480             sender
+[  4]   0.00-10.00  sec  8.63 GBytes  7.41 Gbits/sec                  receiver
+
+iperf Done.
+
+****
+
+containernet> snort_vnf ls /snort-logs/10.0.0.6
+ICMP_ECHO  TCP:55818-5201  TCP:55820-5201
+
+
+***
+osboxes@osboxes:~$ sudo docker exec -it mn.snort_vnf /bin/bash
+[sudo] password for osboxes: 
+root@snort_vnf:/# 
+
+
+***
+root@snort_vnf:/# tail -f /snort-logs/alert
+
+
+
+
+***
+
+containernet> client ssh server
+ssh: connect to host 10.0.0.8 port 22: Connection refused
+
+***
+
+root@snort_vnf:/# tail -f /snort-logs/alert
+03/14-19:48:12.950804  [**] [1:9999998:1] Attention! Some bad guy wants to SSH into your network (tcp:22)! [**] [Priority: 0] {TCP} 10.0.0.6:59852 -> 10.0.0.8:22
+
+****
+containernet> server ncat -k -l 12345 & 
+Accepted connection from 10.0.0.6, port 55818
+[  5] local 10.0.0.8 port 5201 connected to 10.0.0.6 port 55820
+[ ID] Interval           Transfer     Bandwidth
+[  5]   0.00-1.00   sec   522 MBytes  4.38 Gbits/sec                  
+[  5]   1.00-2.00   sec   357 MBytes  2.98 Gbits/sec                  
+[  5]   2.00-3.00   sec   250 MBytes  2.10 Gbits/sec                  
+[  5]   3.00-4.00   sec   665 MBytes  5.60 Gbits/sec                  
+[  5]   4.00-5.00   sec  1.16 GBytes  9.95 Gbits/sec                  
+[  5]   5.00-6.00   sec  1.34 GBytes  11.5 Gbits/sec                  
+[  5]   6.00-7.00   sec  1.19 GBytes  10.2 Gbits/sec                  
+[  5]   7.00-8.00   sec  1.14 GBytes  9.81 Gbits/sec                  
+[  5]   8.00-9.00   sec  1.02 GBytes  8.78 Gbits/sec                  
+[  5]   9.00-9.99   sec  1.02 GBytes  8.85 Gbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Retr
+[  5]   0.00-9.99   sec  8.63 GBytes  7.42 Gbits/sec  1480             sender
+[  5]   0.00-9.99   sec  8.63 GBytes  7.42 Gbits/sec                  receiver
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+
+***
+
+containernet> client ssh -o ConnectTimeout=1 -p 12345 server
+ssh_exchange_identification: Connection closed by remote host
+
+
+****
+root@snort_vnf:/# vi /etc/snort/snort.conf 
+
+# This is a more sophisticated rule that tries to detect SSH connection attempts
+alert tcp any any -> any any (msg:"Attention! Some bad guy wants to SSH into your network!";content:"SSH-";sid:9999999;rev:1)
+
+
+****
+
+
+root@snort_vnf:/# sh restart_snort.sh 
+Spawning daemon child...
+My daemon child 67 lives...
+Daemon parent exiting (0)
+Snort VNF started ...
+
+***
+
+tail -f /snort-logs/alert
+
+***
+containernet> client ssh -o ConnectTimeout=1 -p 12345 server
+Connection timed out during banner exchange
+
+****
+
+root@snort_vnf:/# tail -f /snort-logs/alert
+03/14-19:48:12.950804  [**] [1:9999998:1] Attention! Some bad guy wants to SSH into your network (tcp:22)! [**] [Priority: 0] {TCP} 10.0.0.6:59852 -> 10.0.0.8:22
+03/14-19:53:33.113780  [**] [1:9999999:1] Attention! Some bad guy wants to SSH into your network! [**] [Priority: 0] {TCP} 10.0.0.6:56692 -> 10.0.0.8:12345
+
+
+****
+
+containernet> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 7 links
+.......
+*** Stopping 3 switches
+dc1.s1 dc2.s1 s1 
+*** Stopping 3 hosts
+snort_vnf client server 
+*** Done
+*** Removing NAT rules of 0 SAPs
+
+
+
+
+
 
 
 
