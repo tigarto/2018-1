@@ -76,6 +76,33 @@ containernet> client iperf3 -c 10.0.0.8 -t 10
 Los comandos de manera resumida ejecutados se muestran a continuacion:
 
 ```
+# (Terminal 3) Attach to VNF container to monitor alerts
+docker exec -it mn.snort_vnf /bin/bash
+tail -f /snort-logs/alert
+
+# (Terminal 1) Try a normal SSH connection on port 22
+client ssh server
+
+# (Terminal 3) Output:
+[**] [1:9999998:1] Attention! Some bad guy wants to SSH into your network (tcp:22)! [**] [Priority: 0] {TCP} 10.0.0.6:37990 -> 10.0.0.8:22
+
+# (Terminal 1) Lets try SSH on another port
+server ncat -k -l 12345 & 
+client ssh -o ConnectTimeout=1 -p 12345 server
+
+# (Terminal 3) No output! We don't detect it. Lets add a rule to our Snort config to do DPI-based detection
+vim /etc/snort/snort.conf
+# uncomment last line:
+alert tcp any any -> any any (msg:"Attention! Some bad guy wants to SSH into your network!";content:"SSH-";sid:9999999;rev:1)
+# save, restart snort and start monitoring again
+sh restart_snort.sh 
+tail -f /snort-logs/alert
+
+# (Terminal 1) Lets try SSH on another port again
+client ssh -o ConnectTimeout=1 -p 12345 server
+
+# (Terminal 3) Now we detect SSH connections an any port:
+[**] [1:9999999:1] Attention! Some bad guy wants to SSH into your network! [**] [Priority: 0] {TCP} 10.0.0.6:60131 -> 10.0.0.8:12345
 ```
 
 **Nota**: El comando **0. package the service-project from the son-examples repository** se modifico, pues en la [guia](https://github.com/sonata-nfv/son-emu/wiki/Example-2) el que aparece, no es.
@@ -438,6 +465,7 @@ Connecting to host 10.0.0.8, port 5201
 
 iperf Done.
 ```
+
 ```
 containernet> snort_vnf ls /snort-logs/10.0.0.6
 ICMP_ECHO  TCP:35574-5201  TCP:35576-5201
@@ -445,30 +473,30 @@ ICMP_ECHO  TCP:35574-5201  TCP:35576-5201
 
 ### Parte 3
 
-
-
+**Terminal 3**
 ```
-containernet> exit
-*** Stopping 1 controllers
-c0 
-*** Stopping 11 links
-...........
-*** Stopping 3 switches
-dc1.s1 dc2.s1 s1 
-*** Stopping 3 hosts
-empty_vnf2 empty_vnf3 empty_vnf1 
-*** Done
-*** Removing NAT rules of 0 SAPs
-
-Unhandled exception in thread started by <bound method Thread.__bootstrap of <Thread(Thread-2, stopped daemon 140231391500032)>>
-Traceback (most recent call last):
-  File "/usr/lib/python2.7/threading.py", line 774, in __bootstrap
-    self.__bootstrap_inner()
-  File "/usr/lib/python2.7/threading.py", line 814, in __bootstrap_inner
-    (self.name, _format_exc()))
-  File "/usr/lib/python2.7/traceback.py", line 241, in format_exc
-    etype, value, tb = sys.exc_info()
-AttributeError: 'NoneType' object has no attribute 'exc_info'
+sudo docker exec -it mn.snort_vnf /bin/bash
+[sudo] password for osboxes: 
+root@snort_vnf:/# 
 ```
 
-La salida del comando anterior vemos que da un error todo raro.
+```
+root@snort_vnf:/# tail -f /snort-logs/alert
+```
+
+**Terminal 1**
+```
+containernet> client ssh server
+ssh: connect to host 10.0.0.8 port 22: Connection refused
+```
+
+Cuando se ejecuta el comando anterior la salida en la terminal 3 es la siguiente:
+
+
+**Terminal 3**
+```
+root@snort_vnf:/# tail -f /snort-logs/alert
+03/13-22:55:03.956003  [**] [1:9999998:1] Attention! Some bad guy wants to SSH into your network (tcp:22)! [**] [Priority: 0] {TCP} 10.0.0.6:48214 -> 10.0.0.8:22
+```
+
+**ACA VAMOS...**
