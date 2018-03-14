@@ -1,0 +1,438 @@
+URL: https://github.com/sonata-nfv/son-emu/wiki/Example-3
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ ls
+sonata-snort-service-emu  sonata_y1_demo_topology_1.py
+
+***
+
+son-package --project sonata-snort-service-emu -n sonata-snort-service
+
+
+son-package --project sonata-snort-service-emu -n sonata-snort-service
+2018-03-14 13:06:43 osboxes son.workspace.project[29008] INFO Loading Project configuration 'sonata-snort-service-emu/project.yml'
+2018-03-14 13:06:43 osboxes requests.packages.urllib3.connectionpool[29008] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Create Package Content Section
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating service 'sonata-snort-service-emu/sources/nsd/snort-nsd.yml'
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating syntax of service 'eu.sonata-nfv.sonata-snort-service.0.1'
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Packaging VNF descriptors from project source...
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating function 'sonata-snort-service-emu/sources/vnf/snort-vnf/snort-vnfd.yml'
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating syntax of function 'eu.sonata-nfv.snort-vnf.0.1'
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO package_pcs executed in 0.160 sec
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Create Package Resolver Section
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO package_prs executed in 0.000 sec
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Create Package Dependencies Section
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO package_pds executed in 0.000 sec
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Create Artifact Dependencies Section
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO package_ads executed in 0.000 sec
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Create General Description section
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO package_gds executed in 0.000 sec
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating package '/home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2/sonata-snort-service.son'
+2018-03-14 13:06:43 osboxes son.validate.validate[29008] INFO Validating syntax of package descriptor 'eu.sonata-nfv.package.sonata-snort-service.0.4'
+2018-03-14 13:06:43 osboxes son.package.package[29008] INFO Package generated successfully.
+File: /home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2/sonata-snort-service.son
+MD5: 820f614a9eeeee2f50584937c2d56f3e
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ ls
+salida.txt                sonata-snort-service.son
+sonata-snort-service-emu  sonata_y1_demo_topology_1.py
+
+****
+
+sudo python sonata_y1_demo_topology_1.py
+....
+: n1=dc2.s1 intf1=dc2.s1-eth1 -- n2=s1 intf2=s1-eth2
+*** Configuring hosts
+
+*** Starting controller
+c0 
+*** Starting 3 switches
+dc1.s1 (10ms delay) dc2.s1 (20ms delay) s1 (10ms delay) (20ms delay) ...(10ms delay) (20ms delay) (10ms delay) (20ms delay) 
+*** Starting CLI:
+containernet> 
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ curl -i -X POST -F package=@sonata-snort-service.son http://127.0.0.1:5000/packages
+HTTP/1.1 100 Continue
+
+HTTP/1.0 201 CREATED
+Content-Type: application/json
+Content-Length: 159
+Server: Werkzeug/0.14.1 Python/2.7.12
+Date: Wed, 14 Mar 2018 17:08:52 GMT
+
+{
+    "error": null, 
+    "service_uuid": "ac2ed01d-fa13-40fc-9cdf-6eed0d300e2e", 
+    "sha1": "11162f9bb17847936f49d5a5f6295afcf137bfe4", 
+    "size": 3601
+}
+
+
+****
+
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ curl -X POST http://127.0.0.1:5000/instantiations -d "{}"
+{
+    "service_instance_uuid": "424bf6e0-1077-4c6f-ba2f-aebd00498e65"
+}
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ son-emu-cli compute start -d dc2 -n client -i sonatanfv/sonata-iperf3-vnf
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'dc2',
+    u'docker_network': u'172.17.0.3',
+    u'flavor_name': u'tiny',
+    u'hostname': u'client',
+    u'id': u'5807de9959269f91c5848e5f88303c4fb2df755ad7b2e3d178cedeacb8367e2b',
+    u'image': u'sonatanfv/sonata-iperf3-vnf',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'client',
+    u'network': [   {   u'dc_portname': u'dc2.s1-eth5',
+                        u'intf_name': u'client-eth0',
+                        u'ip': u'10.0.0.6/8',
+                        u'mac': u'7e:d4:d6:aa:0b:db',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'5807de995926',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 29611,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-14T17:09:51.452873277Z',
+                  u'Status': u'running'}}
+
+****
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ son-emu-cli compute start -d dc2 -n server -i sonatanfv/sonata-iperf3-vnf
+{   u'cpu_period': None,
+    u'cpu_quota': -1,
+    u'cpu_shares': None,
+    u'cpuset': None,
+    u'datacenter': u'dc2',
+    u'docker_network': u'172.17.0.4',
+    u'flavor_name': u'tiny',
+    u'hostname': u'server',
+    u'id': u'6f88ad4900263fde190696bcd784bf7a266170b9d3a7c17de80ce0ca5c7befe0',
+    u'image': u'sonatanfv/sonata-iperf3-vnf',
+    u'mem_limit': None,
+    u'memswap_limit': None,
+    u'name': u'server',
+    u'network': [   {   u'dc_portname': u'dc2.s1-eth6',
+                        u'intf_name': u'server-eth0',
+                        u'ip': u'10.0.0.8/8',
+                        u'mac': u'f2:62:44:7d:20:b2',
+                        u'netmask': u'8',
+                        u'status': u'OK',
+                        u'up': True,
+                        u'vlan': None}],
+    u'short_id': u'6f88ad490026',
+    u'state': {   u'Dead': False,
+                  u'Error': u'',
+                  u'ExitCode': 0,
+                  u'FinishedAt': u'0001-01-01T00:00:00Z',
+                  u'OOMKilled': False,
+                  u'Paused': False,
+                  u'Pid': 29813,
+                  u'Restarting': False,
+                  u'Running': True,
+                  u'StartedAt': u'2018-03-14T17:10:22.924562758Z',
+                  u'Status': u'running'}}
+
+****
+sudo docker ps
+CONTAINER ID        IMAGE                            COMMAND             CREATED             STATUS              PORTS               NAMES
+2885504cb7a1        sonatanfv/sonata-iperf3-vnf      "/bin/bash"         11 seconds ago      Up 6 seconds                            mn.server
+3ace721ead26        sonatanfv/sonata-iperf3-vnf      "/bin/bash"         30 seconds ago      Up 26 seconds                           mn.client
+2a1e8a675116        sonatanfv/sonata-snort-ids-vnf   "/bin/bash"         53 seconds ago      Up 49 seconds                           mn.snort_vnf
+
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ son-emu-cli compute list
++--------------+-------------+--------------------------------+-------------------+-------------------------------------+
+| Datacenter   | Container   | Image                          | Interface list    | Datacenter interfaces               |
++==============+=============+================================+===================+=====================================+
+| dc2          | snort_vnf   | sonatanfv/sonata-snort-ids-vnf | mgmt,input,output | dc2.s1-eth2,dc2.s1-eth3,dc2.s1-eth4 |
++--------------+-------------+--------------------------------+-------------------+-------------------------------------+
+| dc2          | client      | sonatanfv/sonata-iperf3-vnf    | client-eth0       | dc2.s1-eth5                         |
++--------------+-------------+--------------------------------+-------------------+-------------------------------------+
+| dc2          | server      | sonatanfv/sonata-iperf3-vnf    | server-eth0       | dc2.s1-eth6                         |
++--------------+-------------+--------------------------------+-------------------+-------------------------------------+
+
+***
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ son-emu-cli network add -b -src client:client-eth0 -dst snort_vnf:input
+"success: add-flow between client and snort_vnf with options: {
+ "priority": "1000", 
+ "path": [
+  "dc2.s1"
+ ], 
+ "vlan": 2, 
+ "cookie": "10", 
+ "match_input": null
+}
+success: add-flow between snort_vnf and client with options: {
+ "priority": "1000", 
+ "path": [
+  "dc2.s1"
+ ], 
+ "vlan": 3, 
+ "cookie": "10", 
+ "match_input": null
+}"
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ son-emu-cli network add -b -src snort_vnf:output -dst server:server-eth0
+"success: add-flow between snort_vnf and server with options: {
+ "priority": "1000", 
+ "path": [
+  "dc2.s1"
+ ], 
+ "vlan": 4, 
+ "cookie": "10", 
+ "match_input": null
+}
+success: add-flow between server and snort_vnf with options: {
+ "priority": "1000", 
+ "path": [
+  "dc2.s1"
+ ], 
+ "vlan": 5, 
+ "cookie": "10", 
+ "match_input": null
+}"
+
+
+****
+containernet> client ping -c20 server
+PING 10.0.0.8 (10.0.0.8): 56 data bytes
+64 bytes from 10.0.0.8: icmp_seq=0 ttl=64 time=0.664 ms
+64 bytes from 10.0.0.8: icmp_seq=1 ttl=64 time=0.253 ms
+64 bytes from 10.0.0.8: icmp_seq=2 ttl=64 time=0.229 ms
+64 bytes from 10.0.0.8: icmp_seq=3 ttl=64 time=0.161 ms
+64 bytes from 10.0.0.8: icmp_seq=4 ttl=64 time=0.163 ms
+64 bytes from 10.0.0.8: icmp_seq=5 ttl=64 time=0.101 ms
+64 bytes from 10.0.0.8: icmp_seq=6 ttl=64 time=0.164 ms
+64 bytes from 10.0.0.8: icmp_seq=7 ttl=64 time=0.175 ms
+64 bytes from 10.0.0.8: icmp_seq=8 ttl=64 time=0.218 ms
+64 bytes from 10.0.0.8: icmp_seq=9 ttl=64 time=0.168 ms
+64 bytes from 10.0.0.8: icmp_seq=10 ttl=64 time=0.139 ms
+64 bytes from 10.0.0.8: icmp_seq=11 ttl=64 time=0.073 ms
+64 bytes from 10.0.0.8: icmp_seq=12 ttl=64 time=0.161 ms
+64 bytes from 10.0.0.8: icmp_seq=13 ttl=64 time=0.232 ms
+64 bytes from 10.0.0.8: icmp_seq=14 ttl=64 time=0.166 ms
+64 bytes from 10.0.0.8: icmp_seq=15 ttl=64 time=0.164 ms
+64 bytes from 10.0.0.8: icmp_seq=16 ttl=64 time=0.165 ms
+64 bytes from 10.0.0.8: icmp_seq=17 ttl=64 time=0.144 ms
+64 bytes from 10.0.0.8: icmp_seq=18 ttl=64 time=0.172 ms
+64 bytes from 10.0.0.8: icmp_seq=19 ttl=64 time=0.166 ms
+--- 10.0.0.8 ping statistics ---
+20 packets transmitted, 20 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.073/0.194/0.664/0.115 ms
+
+
+****
+containernet> snort_vnf cat /snort-logs/10.0.0.8/ICMP_ECHO_REPLY
+[**] Ping! [**]
+03/14-17:33:31.427522 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:21777 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:0  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:32.427832 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:21815 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:1  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:33.429046 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:21957 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:2  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:34.429411 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22104 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:3  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:35.430543 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22349 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:4  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:36.431525 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22493 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:5  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:37.432146 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22640 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:6  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:38.432791 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22737 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:7  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:39.433817 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:22976 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:8  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:40.434648 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23138 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:9  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:41.435707 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23199 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:10  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:42.436216 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23384 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:11  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:43.437497 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23433 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:12  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:44.439389 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23523 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:13  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:45.441256 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23730 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:14  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:46.442866 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23872 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:15  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:47.444009 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:23995 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:16  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:48.445597 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:24044 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:17  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:49.447875 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:24098 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:18  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+[**] Ping! [**]
+03/14-17:33:50.449373 10.0.0.8 -> 10.0.0.6
+ICMP TTL:64 TOS:0x0 ID:24129 IpLen:20 DgmLen:84
+Type:0  Code:0  ID:27  Seq:19  ECHO REPLY
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+****
+
+Extension:
+
+containernet> server iperf3 -s &
+
+****
+
+containernet> client iperf3 -c 10.0.0.8 -t 10
+Connecting to host 10.0.0.8, port 5201
+[  4] local 10.0.0.6 port 48618 connected to 10.0.0.8 port 5201
+[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+[  4]   0.00-1.00   sec  1.12 GBytes  9.63 Gbits/sec    0   2.94 MBytes       
+[  4]   1.00-2.00   sec  1.14 GBytes  9.78 Gbits/sec  137   2.08 MBytes       
+[  4]   2.00-3.00   sec  1.23 GBytes  10.6 Gbits/sec  226   2.19 MBytes       
+[  4]   3.00-4.00   sec  1.05 GBytes  9.01 Gbits/sec    0   2.21 MBytes       
+[  4]   4.00-5.00   sec  1.10 GBytes  9.45 Gbits/sec    0   2.23 MBytes       
+[  4]   5.00-6.00   sec  1.10 GBytes  9.47 Gbits/sec    0   2.26 MBytes       
+[  4]   6.00-7.00   sec   939 MBytes  7.88 Gbits/sec  673   1.66 MBytes       
+[  4]   7.00-8.00   sec   989 MBytes  8.29 Gbits/sec    0   1.75 MBytes       
+[  4]   8.00-9.00   sec  1.20 GBytes  10.4 Gbits/sec    0   1.80 MBytes       
+[  4]   9.00-10.00  sec  1.20 GBytes  10.3 Gbits/sec    0   1.83 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Retr
+[  4]   0.00-10.00  sec  11.0 GBytes  9.48 Gbits/sec  1036             sender
+[  4]   0.00-10.00  sec  11.0 GBytes  9.46 Gbits/sec                  receiver
+
+
+****
+containernet> snort_vnf ls /snort-logs/10.0.0.6
+ICMP_ECHO  TCP:48616-5201  TCP:48618-5201
+
+
+---------------------------------
+
+Extension II (Y1 demo example):
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ sudo docker exec -it mn.snort_vnf /bin/bash
+[sudo] password for osboxes: 
+Sorry, try again.
+[sudo] password for osboxes: 
+root@snort_vnf:/# 
+
+
+****
+root@snort_vnf:/# tail -f /snort-logs/alert
+
+
+se queda esperando ...
+
+***
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba2$ ssh server
+
+
+****
+
+Hasta aqui llegue esta vez
+
+
+
+
+
