@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key attr.name="label" attr.type="string" for="edge" id="d8" />
+  <key attr.name="type" attr.type="string" for="edge" id="d7" />
+  <key attr.name="level" attr.type="long" for="edge" id="d6" />
+  <key attr.name="label" attr.type="string" for="node" id="d5" />
+  <key attr.name="parent_id" attr.type="string" for="node" id="d4" />
+  <key attr.name="level" attr.type="long" for="node" id="d3" />
+  <key attr.name="node_label" attr.type="string" for="node" id="d2" />
+  <key attr.name="type" attr.type="string" for="node" id="d1" />
+  <key attr.name="node_id" attr.type="string" for="node" id="d0" />
+  <graph edgedefault="undirected">
+    <node id="output">
+      <data key="d0">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">sonata-empty-service</data>
+      <data key="d3">0</data>
+      <data key="d4" />
+      <data key="d5">output</data>
+    </node>
+    <node id="empty_vnf2:vdu01">
+      <data key="d0">vdu01</data>
+      <data key="d1">iface</data>
+      <data key="d2">vdu01</data>
+      <data key="d3">2</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf2.0.1</data>
+      <data key="d5">cp02</data>
+    </node>
+    <node id="empty_vnf3:output">
+      <data key="d0">eu.sonata-nfv.empty-vnf3.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf3</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">output</data>
+    </node>
+    <node id="empty_vnf3:vdu01">
+      <data key="d0">vdu01</data>
+      <data key="d1">iface</data>
+      <data key="d2">vdu01</data>
+      <data key="d3">2</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf3.0.1</data>
+      <data key="d5">cp02</data>
+    </node>
+    <node id="empty_vnf2:br-mgmt">
+      <data key="d5">br-mgmt</data>
+      <data key="d1">bridge</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf2.0.1</data>
+      <data key="d3">2</data>
+    </node>
+    <node id="empty_vnf2:output">
+      <data key="d0">eu.sonata-nfv.empty-vnf2.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf2</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">output</data>
+    </node>
+    <node id="br-mgmt">
+      <data key="d5">br-mgmt</data>
+      <data key="d1">bridge</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d3">1</data>
+    </node>
+    <node id="empty_vnf1:mgmt">
+      <data key="d0">eu.sonata-nfv.empty-vnf1.0.1</data>
+      <data key="d1">br-iface</data>
+      <data key="d2">empty-vnf1</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">mgmt</data>
+    </node>
+    <node id="empty_vnf1:br-mgmt">
+      <data key="d5">br-mgmt</data>
+      <data key="d1">bridge</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf1.0.1</data>
+      <data key="d3">2</data>
+    </node>
+    <node id="empty_vnf1:vdu01">
+      <data key="d0">vdu01</data>
+      <data key="d1">iface</data>
+      <data key="d2">vdu01</data>
+      <data key="d3">2</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf1.0.1</data>
+      <data key="d5">cp02</data>
+    </node>
+    <node id="empty_vnf3:br-mgmt">
+      <data key="d5">br-mgmt</data>
+      <data key="d1">bridge</data>
+      <data key="d4">eu.sonata-nfv.empty-vnf3.0.1</data>
+      <data key="d3">2</data>
+    </node>
+    <node id="input">
+      <data key="d0">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">sonata-empty-service</data>
+      <data key="d3">0</data>
+      <data key="d4" />
+      <data key="d5">input</data>
+    </node>
+    <node id="empty_vnf3:mgmt">
+      <data key="d0">eu.sonata-nfv.empty-vnf3.0.1</data>
+      <data key="d1">br-iface</data>
+      <data key="d2">empty-vnf3</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">mgmt</data>
+    </node>
+    <node id="empty_vnf1:input">
+      <data key="d0">eu.sonata-nfv.empty-vnf1.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf1</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">input</data>
+    </node>
+    <node id="empty_vnf2:mgmt">
+      <data key="d0">eu.sonata-nfv.empty-vnf2.0.1</data>
+      <data key="d1">br-iface</data>
+      <data key="d2">empty-vnf2</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">mgmt</data>
+    </node>
+    <node id="empty_vnf1:output">
+      <data key="d0">eu.sonata-nfv.empty-vnf1.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf1</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">output</data>
+    </node>
+    <node id="empty_vnf3:input">
+      <data key="d0">eu.sonata-nfv.empty-vnf3.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf3</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">input</data>
+    </node>
+    <node id="empty_vnf2:input">
+      <data key="d0">eu.sonata-nfv.empty-vnf2.0.1</data>
+      <data key="d1">iface</data>
+      <data key="d2">empty-vnf2</data>
+      <data key="d3">1</data>
+      <data key="d4">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d5">input</data>
+    </node>
+    <node id="mgmt">
+      <data key="d0">eu.sonata-nfv.sonata-empty-service.0.1</data>
+      <data key="d1">br-iface</data>
+      <data key="d2">sonata-empty-service</data>
+      <data key="d3">0</data>
+      <data key="d4" />
+      <data key="d5">mgmt</data>
+    </node>
+    <edge source="output" target="empty_vnf3:output">
+      <data key="d6">1</data>
+      <data key="d7">iface</data>
+      <data key="d8">link-output</data>
+    </edge>
+    <edge source="empty_vnf2:vdu01" target="empty_vnf2:input">
+      <data key="d8">input</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf2:vdu01" target="empty_vnf2:output">
+      <data key="d8">output</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf2:vdu01" target="empty_vnf2:br-mgmt">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="empty_vnf3:output" target="empty_vnf3:vdu01">
+      <data key="d8">output</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf3:vdu01" target="empty_vnf3:br-mgmt">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="empty_vnf3:vdu01" target="empty_vnf3:input">
+      <data key="d8">input</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf2:br-mgmt" target="empty_vnf2:mgmt">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="empty_vnf2:output" target="empty_vnf3:input">
+      <data key="d6">1</data>
+      <data key="d7">iface</data>
+      <data key="d8">link-23</data>
+    </edge>
+    <edge source="br-mgmt" target="empty_vnf1:mgmt">
+      <data key="d8">mgmt</data>
+      <data key="d7">br-iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="br-mgmt" target="empty_vnf3:mgmt">
+      <data key="d8">mgmt</data>
+      <data key="d7">br-iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="br-mgmt" target="mgmt">
+      <data key="d8">mgmt</data>
+      <data key="d7">br-iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="br-mgmt" target="empty_vnf2:mgmt">
+      <data key="d8">mgmt</data>
+      <data key="d7">br-iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf1:mgmt" target="empty_vnf1:br-mgmt">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="empty_vnf1:br-mgmt" target="empty_vnf1:vdu01">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="empty_vnf1:vdu01" target="empty_vnf1:output">
+      <data key="d8">output</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf1:vdu01" target="empty_vnf1:input">
+      <data key="d8">input</data>
+      <data key="d7">iface</data>
+      <data key="d6">1</data>
+    </edge>
+    <edge source="empty_vnf3:br-mgmt" target="empty_vnf3:mgmt">
+      <data key="d8">mgmt</data>
+    </edge>
+    <edge source="input" target="empty_vnf1:input">
+      <data key="d6">1</data>
+      <data key="d7">iface</data>
+      <data key="d8">link-input</data>
+    </edge>
+    <edge source="empty_vnf1:output" target="empty_vnf2:input">
+      <data key="d6">1</data>
+      <data key="d7">iface</data>
+      <data key="d8">link-12</data>
+    </edge>
+  </graph>
+</graphml>

@@ -1,0 +1,566 @@
+Otros ejemplos: 
+https://github.com/sonata-nfv/son-tutorials/tree/master/upb-emulator-mano-integration-demo
+https://github.com/sonata-nfv/son-tutorials/tree/master/upb-containernet-emulator-summerschool-demo
+
+
+https://github.com/sonata-nfv/son-tutorials/blob/master/docs/start_using.md
+
+
+
+    Step 1: Create Workspace
+
+son-workspace --init
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018$ mkdir prueba3
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018$ cd prueba3/
+
+
+
+son-workspace --init --workspace .
+
+
+son-workspace --project project_prueba3
+2018-03-14 20:10:17 osboxes son.workspace.project[7042] INFO Creating project at project_prueba3
+
+cd project_prueba3/sources/
+
+
+SE edito:
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-validate --project project_prueba3/
+2018-03-14 20:19:19 osboxes son.workspace.project[7499] INFO Loading Project configuration 'project_prueba3/project.yml'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating project 'project_prueba3/'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating service 'project_prueba3/sources/nsd/nsd.yml'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating syntax of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating integrity of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf1/empty-vnf1-vnfd.yml'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf3/empty-vnf3-vnfd.yml'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf2/empty-vnf2-vnfd.yml'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:19:20 osboxes son.validate.validate[7499] INFO Validating topology of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+==== Statistics: 0 error(s) and 0 warning(s) ====
+Errors: []
+Warnings: []
+
+
+son-package --project project_prueba3 -n prueba3_package
+2018-03-14 20:21:09 osboxes son.workspace.project[7538] INFO Loading Project configuration 'project_prueba3/project.yml'
+2018-03-14 20:21:09 osboxes requests.packages.urllib3.connectionpool[7538] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+2018-03-14 20:21:10 osboxes son.package.package[7538] INFO Create Package Content Section
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating service 'project_prueba3/sources/nsd/nsd.yml'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating syntax of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Packaging VNF descriptors from project source...
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf1/empty-vnf1-vnfd.yml'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf3/empty-vnf3-vnfd.yml'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf2/empty-vnf2-vnfd.yml'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO package_pcs executed in 0.348 sec
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Create Package Resolver Section
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO package_prs executed in 0.000 sec
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Create Package Dependencies Section
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO package_pds executed in 0.000 sec
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Create Artifact Dependencies Section
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO package_ads executed in 0.000 sec
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Create General Description section
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO package_gds executed in 0.000 sec
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating package '/home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3/prueba3_package.son'
+2018-03-14 20:21:11 osboxes son.validate.validate[7538] INFO Validating syntax of package descriptor 'eu.sonata-nfv.package.sonata-empty-service.0.4'
+2018-03-14 20:21:11 osboxes son.package.package[7538] INFO Package generated successfully.
+File: /home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3/prueba3_package.son
+MD5: a4a8e630330e02e12dd309692bc8c456
+
+
+****
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ ls
+graphs  project_prueba3  prueba3_package.son
+
+****
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-access push --upload prueba3_package.son
+2018-03-14 20:22:25 osboxes requests.packages.urllib3.connectionpool[7571] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+prueba3_package.son
+Pushing package
+SIGN = False
+2018-03-14 20:22:26 osboxes requests.packages.urllib3.connectionpool[7571] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+Upload error (401): '{"error":{"code":401,"message":"Unauthorized: missing authorization header"}}'
+
+***
+
+----------------------------------------------------------------------------------------
+
+1. 
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-workspace --project project_prueba3
+2018-03-14 20:29:24 osboxes son.workspace.project[7743] INFO Creating project at project_prueba3
+
+***
+
+2. Edit NSD and VNFDs to compose the service
+
+https://github.com/sonata-nfv/son-emu/wiki/Example-2
+
++--------+     +-------+     +--------+
+|  vnf1  <-----> vnf2  <----->  vnf3  |
++--------+     +-------+     +--------+
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ cp ../prueba2/sonata_y1_demo_topology_1.py .
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ ls
+project_prueba3  salida.txt  sonata_y1_demo_topology_1.py
+
+
+*********************
+
+3. 
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-validate --project project_prueba3/
+2018-03-14 20:34:33 osboxes son.workspace.project[7994] INFO Loading Project configuration 'project_prueba3/project.yml'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating project 'project_prueba3/'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating service 'project_prueba3/sources/nsd/nsd.yml'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating syntax of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating integrity of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf2/empty-vnf2-vnfd.yml'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf3/empty-vnf3-vnfd.yml'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf1/empty-vnf1-vnfd.yml'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO ... syntax: True, integrity: True, topology: True
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating integrity of function descriptor 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating topology of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:34:34 osboxes son.validate.validate[7994] INFO Validating topology of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+==== Statistics: 0 error(s) and 0 warning(s) ====
+Errors: []
+Warnings: []
+
+
+****************************
+
+5. 
+son-package --project project_prueba3 -n prueba3_package
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-package --project project_prueba3 -n prueba3_package
+2018-03-14 20:35:43 osboxes son.workspace.project[8048] INFO Loading Project configuration 'project_prueba3/project.yml'
+2018-03-14 20:35:43 osboxes requests.packages.urllib3.connectionpool[8048] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Create Package Content Section
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating service 'project_prueba3/sources/nsd/nsd.yml'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating syntax of service 'eu.sonata-nfv.sonata-empty-service.0.1'
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Packaging VNF descriptors from project source...
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf1/empty-vnf1-vnfd.yml'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf1.0.1'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf3/empty-vnf3-vnfd.yml'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf3.0.1'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating function 'project_prueba3/sources/vnf/empty-vnf2/empty-vnf2-vnfd.yml'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO ... syntax: True, integrity: False, topology: False
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating syntax of function 'eu.sonata-nfv.empty-vnf2.0.1'
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO package_pcs executed in 0.338 sec
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Create Package Resolver Section
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO package_prs executed in 0.000 sec
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Create Package Dependencies Section
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO package_pds executed in 0.000 sec
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Create Artifact Dependencies Section
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO package_ads executed in 0.000 sec
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Create General Description section
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO package_gds executed in 0.000 sec
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating package '/home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3/prueba3_package.son'
+2018-03-14 20:35:44 osboxes son.validate.validate[8048] INFO Validating syntax of package descriptor 'eu.sonata-nfv.package.sonata-empty-service.0.4'
+2018-03-14 20:35:44 osboxes son.package.package[8048] INFO Package generated successfully.
+File: /home/osboxes/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3/prueba3_package.son
+MD5: eba7d5c003658e48ced95a36776a09cf
+
+
+******************
+
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ ls
+graphs           prueba3_package.son  sonata_y1_demo_topology_1.py
+project_prueba3  salida.txt
+
+
+****
+
+6.
+
+son-access push --upload prueba_package.son
+
+2018-03-14 20:37:32 osboxes requests.packages.urllib3.connectionpool[8086] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+prueba3_package.son
+Pushing package
+SIGN = False
+2018-03-14 20:37:33 osboxes requests.packages.urllib3.connectionpool[8086] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+Upload error (401): '{"error":{"code":401,"message":"Unauthorized: missing authorization header"}}'
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ 
+
+
+---------------------------------------------------------------------------
+
+TESTING EL NETWORK SERVICE
+
+son-access push --deploy
+
+
+
+sudo python sonata_y1_demo_topology_1.py
+
+son-access push --deploy
+
+
+.....
+
+curl -i -X POST -F package=@prueba_package.son http://127.0.0.1:5000/packages
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ curl -i -X POST -F package=@prueba3_package.son http://127.0.0.1:5000/packages
+HTTP/1.1 100 Continue
+
+HTTP/1.0 201 CREATED
+Content-Type: application/json
+Content-Length: 159
+Server: Werkzeug/0.14.1 Python/2.7.12
+Date: Thu, 15 Mar 2018 00:43:30 GMT
+
+{
+    "error": null, 
+    "service_uuid": "dcce6bcc-8150-482a-aa67-dc62e65e44c7", 
+    "sha1": "53c7fa30f5ddfec22a7f6ff495d250320538eb34", 
+    "size": 7098
+}
+
+...
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ curl -X POST http://127.0.0.1:5000/instantiations -d "{}"
+{
+    "service_instance_uuid": "9a279984-94f2-4e41-8333-f63850bf8e89"
+}
+
+
+....
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ son-emu-cli compute list
++--------------+-------------+----------------------------+-------------------+-------------------------------------+
+| Datacenter   | Container   | Image                      | Interface list    | Datacenter interfaces               |
++==============+=============+============================+===================+=====================================+
+| dc2          | empty_vnf2  | sonatanfv/sonata-empty-vnf | mgmt,input,output | dc2.s1-eth2,dc2.s1-eth3,dc2.s1-eth4 |
++--------------+-------------+----------------------------+-------------------+-------------------------------------+
+| dc2          | empty_vnf1  | sonatanfv/sonata-empty-vnf | mgmt,input,output | dc2.s1-eth5,dc2.s1-eth6,dc2.s1-eth7 |
++--------------+-------------+----------------------------+-------------------+-------------------------------------+
+| dc1          | empty_vnf3  | sonatanfv/sonata-empty-vnf | mgmt,input,output | dc1.s1-eth2,dc1.s1-eth3,dc1.s1-eth4 |
++--------------+-------------+----------------------------+-------------------+-------------------------------------+
+
+containernet> empty_vnf2 ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02  
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:27 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:3879 (3.8 KB)  TX bytes:0 (0.0 B)
+
+input     Link encap:Ethernet  HWaddr b2:c1:27:35:89:6e  
+          inet addr:10.30.0.2  Bcast:10.30.0.3  Mask:255.255.255.252
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:29 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:4205 (4.2 KB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+mgmt      Link encap:Ethernet  HWaddr ce:93:37:aa:42:ec  
+          inet addr:10.20.0.2  Bcast:10.20.0.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:25 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:3659 (3.6 KB)  TX bytes:0 (0.0 B)
+
+output    Link encap:Ethernet  HWaddr 9e:a8:b4:f5:2a:83  
+          inet addr:10.30.1.1  Bcast:10.30.1.3  Mask:255.255.255.252
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:25 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:3659 (3.6 KB)  TX bytes:0 (0.0 B)
+
+
+containernet> empty_vnf1 ping -c 2 10.30.0.2
+PING 10.30.0.2 (10.30.0.2): 56 data bytes
+92 bytes from 10.30.0.1: Destination Host Unreachable
+92 bytes from 10.30.0.1: Destination Host Unreachable
+--- 10.30.0.2 ping statistics ---
+2 packets transmitted, 0 packets received, 100% packet loss
+
+--
+
+
+containernet> empty_vnf2 ping -c 2 10.30.1.2
+PING 10.30.1.2 (10.30.1.2): 56 data bytes
+64 bytes from 10.30.1.2: icmp_seq=0 ttl=64 time=131.500 ms
+64 bytes from 10.30.1.2: icmp_seq=1 ttl=64 time=63.528 ms
+--- 10.30.1.2 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 63.528/97.514/131.500/33.986 ms
+---
+containernet> exit
+*** Stopping 1 controllers
+c0 
+*** Stopping 11 links
+...........
+*** Stopping 3 switches
+dc1.s1 dc2.s1 s1 
+*** Stopping 3 hosts
+empty_vnf2 empty_vnf3 empty_vnf1 
+*** Done
+*** Removing NAT rules of 0 SAPs
+
+---------------------------------
+
+https://github.com/sonata-nfv/son-tutorials/tree/master/upb-containernet-emulator-summerschool-demo
+
+Codigos:
+https://github.com/sonata-nfv/son-tutorials/tree/master/upb-containernet-emulator-summerschool-demo/topologies
+
+
+https://raw.githubusercontent.com/sonata-nfv/son-tutorials/master/upb-containernet-emulator-summerschool-demo/topologies/son-emu_example3.py
+
+
+
+osboxes@osboxes:~/Documents/2018-1/ensayo4/pruebas_14_04_2018/prueba3$ ls
+graphs           prueba3_package.son  sonata_y1_demo_topology_1.py
+project_prueba3  salida.txt           son-emu_example3.py
+
+
+https://github.com/sonata-nfv/son-tutorials/tree/master/upb-containernet-emulator-summerschool-demo
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+http://sonata-nfv.eu/sites/default/files/sonata/public/content-files/pages/SONATA_3.0_TUTORIAL_v0.3.pdf
+
+osboxes@osboxes:~/Documents/son-tutorials/upb-containernet-emulator-summerschool-demo$ pwd
+/home/osboxes/Documents/son-tutorials/upb-containernet-emulator-summerschool-demo
+
+osboxes@osboxes:~/Documents/son-tutorials/upb-containernet-emulator-summerschool-demo$ ls
+example_heat_service.yml  README.md  sonata-demo-service  topologies  vnfs
+
+
+sudo python topologies/son-emu_example3.py
+son-package --project sonata-demo-service -n sonata-demo-service
+
+son-access push --upload sonata-demo-service.son
+2018-03-14 21:05:19 osboxes requests.packages.urllib3.connectionpool[10661] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+sonata-demo-service.son
+Pushing package
+SIGN = False
+2018-03-14 21:05:20 osboxes requests.packages.urllib3.connectionpool[10661] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+Upload error (401): '{"error":{"code":401,"message":"Unauthorized: missing authorization header"}}'
+
+(((((((((((((((((((((
+google: urllib3  Upload error (401): '{"error":{"code":401,"message":"Unauthorized: missing authorization header"}}'
+
+https://airbrake.io/blog/http-errors/401-unauthorized-error
+
+https://docs.python.org/3.1/howto/urllib2.html
+
+
+))))))))))))))))))
+ sudo docker-compose up
+
+
+REvisando las dependencias son-access:
+
+Dependencies:
+
+    pyaml >= 15.8.2 (WTFPL)
+    validators >= 0.10.3 (BSD)
+    requests >= 2.10 (Apache 2.0)
+    PyJWT >= 1.4.0 (MIT)
+    Flask >= 0.11.1 (BSD)
+
+faltan:
+PyJWT
+requests
+validators
+
+sudo pip install validators
+sudo pip install PyJWT
+sudo pip install requests
+
+----------------------------
+
+SONRE EL ERROR: https://github.com/sonata-nfv/son-cli/issues/259
+
+
+sudo son-access config --platform_id sp1 --default
+2018-03-14 21:52:32 osboxes requests.packages.urllib3.connectionpool[11775] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+2018-03-14 21:52:32 osboxes son.access.access[11775] INFO Service Platform ID='sp1':
+{'credentials': {'password': 's0n@t@', 'signature': {'cert': '', 'pub_key': '', 'prv_key': ''}, 'token_file': 'token.txt', 'username': 'sonata'}, 'url': 'http://sp.int3.sonata-nfv.eu:32001'}
+
+son-access --platform sp1 auth
+2018-03-14 21:53:03 osboxes requests.packages.urllib3.connectionpool[11788] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+2018-03-14 21:53:04 osboxes requests.packages.urllib3.connectionpool[11788] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+Authentication response: {"error":{"code":401,"message":"Unauthorized: user sonata not authenticated"}}
+
+-------------------
+
+(((
+https://github.com/sonata-nfv/son-cli/blob/master/src/son/access/README.md
+
+son-access config --platform_id sp2 --new --url http://127.0.0.1:5001 --default
+son-access auth -u tester -p 1234
+son-access list services
+    son-access push --upload samples/sonata-demo.son
+son-access push --upload sonata-demo.son --sign
+    son-access --platform sp1 push --upload samples/sonata-demo.son
+    son-access pull packages --uuid 65b416a6-46c0-4596-a9e9-0a9b04ed34ea
+    son-access pull services --id sonata.eu firewall-vnf 1.0
+    son-access --platform sp1 push --deploy 65b416a6-46c0-4596-a9e9-0a9b04ed34ea
+
+)))
+
+son-access config --platform_id sp2 --new --url http://127.0.0.1:5001 --default
+2018-03-14 22:02:53 osboxes requests.packages.urllib3.connectionpool[11928] INFO Starting new HTTP connection (1): sp.int3.sonata-nfv.eu
+new
+2018-03-14 22:02:54 osboxes son.access.access[11928] INFO Service Platform ID='sp2':
+{'credentials': {'username': '', 'signature': {'cert': '', 'prv_key': '', 'pub_key': ''}, 'password': '', 'token_file': ''}, 'url': 'http://127.0.0.1:5001'}
+
+
+osboxes@osboxes:~/.son-workspace$ son-access config --platform_id sp2 -u tester -p 1234
+2018-03-14 22:08:11 osboxes requests.packages.urllib3.connectionpool[12015] INFO Starting new HTTP connection (1): 127.0.0.1
+2018-03-14 22:08:11 osboxes son.access.access[12015] WARNING Service Platform Public Key not found. Authentication is disabled.
+2018-03-14 22:08:11 osboxes son.access.access[12015] INFO Service Platform ID='sp2':
+{'url': 'http://127.0.0.1:5001', 'credentials': {'password': '1234', 'username': 'tester', 'signature': {'pub_key': '', 'prv_key': '', 'cert': ''}, 'token_file': ''}}
+
+son-access config --platform_id sp2 --url http://127.0.0.1
+2018-03-14 22:09:30 osboxes requests.packages.urllib3.connectionpool[12042] INFO Starting new HTTP connection (1): 127.0.0.1
+2018-03-14 22:09:30 osboxes son.access.access[12042] WARNING Service Platform Public Key not found. Authentication is disabled.
+2018-03-14 22:09:30 osboxes son.access.access[12042] INFO Service Platform ID='sp2':
+{'credentials': {'signature': {'cert': '', 'prv_key': '', 'pub_key': ''}, 'username': 'tester', 'token_file': '', 'password': '1234'}, 'url': 'http://127.0.0.1'}
+
+
+--------------------------------------------------------------------------------------------------
+
+https://sonata-nfv.github.io/start_using.html
+
+###############################################################################################################################
+FECHA: 15/03/2018
+
+https://github.com/sonata-nfv/son-cli/issues/98
+
+
+Ojo: Que es sonata gui --- https://github.com/sonata-nfv/son-gui
+
+SONATA's Service Platform Graphical User Interface
+
+https://github.com/sonata-nfv/son-gui/wiki/Build-and-Install
+https://github.com/sonata-nfv/son-gui
+
+
+cd 
+
+git clone https://github.com/sonata-nfv/son-gui.git
+Cloning into 'son-gui'...
+remote: Counting objects: 18844, done.
+remote: Total 18844 (delta 0), reused 0 (delta 0), pack-reused 18844
+Receiving objects: 100% (18844/18844), 41.41 MiB | 756.00 KiB/s, done.
+Resolving deltas: 100% (5887/5887), done.
+Checking connectivity... done.
+
+
+cd son-gui
+sudo docker build -t sonata-gui .
+
+El anterior comando saco un error, asi que se procedio a buscar en docker hub otro archivo, al parecer ser encontro esta y se procedio a descargar de : https://hub.docker.com/r/tdierich/son-gui/
+
+Para ello se escribio en consola:
+sudo docker pull tdierich/son-gui
+
+osboxes@osboxes:~/son-gui$ sudo docker images 
+[sudo] password for osboxes: 
+REPOSITORY                       TAG                 IMAGE ID            CREATED             SIZE
+soneditorbackend_son-editor      latest              1eb550e846b5        4 days ago          1.16GB
+ubuntu                           14.04               a35e70164dfb        8 days ago          222MB
+ubuntu                           trusty              a35e70164dfb        8 days ago          222MB
+ubuntu_net_tools                 latest              1b1e461a3fe2        3 weeks ago         214MB
+<none>                           <none>              0d5d28a7f062        3 weeks ago         214MB
+sonatanfv/sonata-stress-vnf      latest              14ec4f40fd94        3 weeks ago         154MB
+sonatanfv/sonata-snort-ids-vnf   latest              cd81c15d04fb        3 weeks ago         270MB
+sonatanfv/sonata-iperf3-vnf      latest              fa9904333613        3 weeks ago         298MB
+sonatanfv/sonata-empty-vnf       latest              62dbb712e174        3 weeks ago         157MB
+tiangolo/uwsgi-nginx-flask       flask-python3.5     c54ff21bb240        5 weeks ago         712MB
+ubuntu                           latest              0458a4468cbc        7 weeks ago         112MB
+ubuntu                           <none>              dc4491992653        7 weeks ago         222MB
+tdierich/son-gui                 latest              281625142f6b        2 months ago        564MB
+google/cadvisor                  latest              75f88e3ec333        3 months ago        62.2MB
+
+
+sudo docker run -d -p 80:80 sonata-gui
+
+parece que dio algo
+
+
+-------
+
+
+	
+
+sudo docker run -d -p 80:80 -e "MON_URL=sp.int2.sonata-nfv.eu:8000" -e "GK_URL=sp.int.sonata-nfv.eu:32001" -e "LOGS_URL=logs.sonata-nfv.eu:12900" tdierich/son-gui
+
+
+son-access config --platform_id sp2 --new --url http://sp.int.sonata-nfv.eu:32001 --default
+
+
+son-access auth -u tester -p 1234
+son-access list services
+    son-access push --upload samples/sonata-demo.son
+son-access push --upload sonata-demo.son --sign
+    son-access --platform sp1 push --upload samples/sonata-demo.son
+    son-access pull packages --uuid 65b416a6-46c0-4596-a9e9-0a9b04ed34ea
+    son-access pull services --id sonata.eu firewall-vnf 1.0
+    son-access --platform sp1 push --deploy 65b416a6-46c0-4596-a9e9-0a9b04ed34ea
+
+
+
+
+
+
