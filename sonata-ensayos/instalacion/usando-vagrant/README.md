@@ -38,27 +38,32 @@ choco upgrade powershell
 
 Con el powershell 5 instalado se procede a accederlo:
 
-FIGURA
+![img2](./powershell.png)
+**Figura 2**. Abriendo el powershell.
 
 Con esto listo se procese a seguir los pasos de instalación mostrados en el siguiente [video](https://www.youtube.com/watch?v=e6pgP-utSeE) Y una vez en el directorio previamente mencionado (donde se encuentra el ```Vagrantfile```). Para el caso, inicialmente se procede ejecutar el comando ```vagrant up``` 
 
-FIGURA
+![img3](./install_from_powershell.png)
+**Figura 3**. Iniciando el proceso de instalación.
 
 Se espera un rato por que como es la primera vez que se ejecuta el proceso implica la construccion de la imagen que se alojara en VirtualBox, por lo que puede irse a tomar un cafesito. Cuando regrese vera algo como lo siguiente:
 
-FIGURA
+![img4](./install_from_powershell_finished.png)
+**Figura 4**. Finalizando el proceso de instalación.
 
 Solo resta acceder a la maquina por medio del comando ```vagrant ssh```
 
-
-FIGURA
+![img5](./access_machine.png)
+**Figura 5**. Accediendo a la maquina.
 
 Cuando se haya trabajado lo suficiente con la maquina nos salimos de esta con ```exit```:
-
 
 ```vagrant@sonata-sdk:~$ exit```
 
 Finalmente si no se va a trabajar mas con la maquina virtual la apagamos desde vagrant con el comando ```vagrant halt```
+
+![img6](./halt_VM.png)
+**Figura 6**. Apagando la maquina.
 
 ## Trabajando con la maquina
 
@@ -91,12 +96,3 @@ exit
 ```
 vagrant halt
 ```
-
-
-
-
-
-
-
-  
- 
