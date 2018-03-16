@@ -75,13 +75,11 @@ Finalmente si no se va a trabajar mas con la maquina virtual la apagamos desde v
 
 Todo lo que se hace despues de instalada la maquina virtual desde vagrant se reduce a 5 cosas:
 
-1. Arranque la maquina (si esta esta apagada - esto se puede verificar en virual box). Ejecutando el comando vagrant up donde se encuentra el Vagranfile asociado a la maquina (Ver nota abajo)
+1. Arranque la maquina (si esta esta apagada - esto se puede verificar en virual box). Ejecutando el comando vagrant up donde se encuentra el Vagranfile asociado a la maquina.
 
 ```
 vagrant up
 ```
-
-**Nota**: No he ensayado ejecutando el comando en otra ubicacion, por eso se dice lo de arriba.
 
 2. Acceda a la maquina mediante ssh:
 
