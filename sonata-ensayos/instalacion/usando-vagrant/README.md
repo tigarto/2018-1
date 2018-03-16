@@ -23,6 +23,47 @@ Se procedio a descargar los archivo del siguiente [repositorio](https://github.c
 ![img1](./terminal.png)
 **Figura 1**. Ubicacion en el directorio de trabajo.
 
+Una vez alli teniendo la certeza que esta el archivo de ```Vagrantfile``` se procedio a la instalacion ejecutando el comando:
+
+```
+vagrant up
+```
+
+**Problemas encontrados en el procedimiento**: En nuestro caso, no era posible llevar a cabo la instalación debido a problemas con la consola. Buscando se encontro una posible solucion en el siguiente [foro](https://stackoverflow.com/questions/19902239/how-to-upgrade-powershell-version-from-2-0-to-3-0) asi que tal y como alli se indica se procedio a llevar a cabo la instalacion de una herramienta conocida como [Chocolatey](https://chocolatey.org/) (una especie de apt-get pero para windows) y se llevo a cabo su instalación como se detalla en la pagina. Una vez con Chocolatey instalado se procedio a la instalación del powershell tal y como se indica en el siguiente enlace(https://chocolatey.org/packages/PowerShell) de Chocolatey. Ejecutando los comandos:
+
+```
+choco install powershell
+choco upgrade powershell
+```
+
+Con el powershell 5 instalado se procede a accederlo:
+
+FIGURA
+
+Con esto listo se procese a seguir los pasos de instalación mostrados en el siguiente [video](https://www.youtube.com/watch?v=e6pgP-utSeE) Y una vez en el directorio previamente mencionado (donde se encuentra el ```Vagrantfile```). Para el caso, inicialmente se procede ejecutar el comando ```vagrant up``` 
+
+FIGURA
+
+Se espera un rato por que como es la primera vez que se ejecuta el proceso implica la construccion de la imagen que se alojara en VirtualBox, por lo que puede irse a tomar un cafesito. Cuando regrese vera algo como lo siguiente:
+
+FIGURA
+
+Solo resta acceder a la maquina por medio del comando ```vagrant ssh```
+
+
+FIGURA
+
+Cuando se haya trabajado lo suficiente con la maquina nos salimos de esta con ```exit```:
+
+
+```vagrant@sonata-sdk:~$ exit```
+
+Finalmente si no se va a trabajar mas con la maquina virtual la apagamos desde vagrant con el comando ```vagrant halt```
+
+
+
+
+
 
 
 
