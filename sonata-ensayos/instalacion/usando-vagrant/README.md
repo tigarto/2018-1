@@ -60,6 +60,37 @@ Cuando se haya trabajado lo suficiente con la maquina nos salimos de esta con ``
 
 Finalmente si no se va a trabajar mas con la maquina virtual la apagamos desde vagrant con el comando ```vagrant halt```
 
+## Trabajando con la maquina
+
+Todo lo que se hace despues de instalada la maquina virtual desde vagrant se reduce a 5 cosas:
+
+1. Arranque la maquina (si esta esta apagada - esto se puede verificar en virual box). Ejecutando el comando vagrant up donde se encuentra el Vagranfile asociado a la maquina (Ver nota abajo)
+
+```
+vagrant up
+```
+
+**Nota**: No he ensayado ejecutando el comando en otra ubicacion, por eso se dice lo de arriba.
+
+2. Acceda a la maquina mediante ssh:
+
+```
+vagrant ssh
+```
+
+3. Trabaje en la maquina, haga las tareas que necesite.
+
+4. Cuando culmine desloguese:
+
+```
+exit
+```
+
+5. Finalmente apague la maquina virtual desde vagrant:
+
+```
+vagrant halt
+```
 
 
 
