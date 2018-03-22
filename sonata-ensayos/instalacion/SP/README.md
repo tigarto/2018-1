@@ -84,10 +84,10 @@ enp1s0    Link encap:Ethernet  HWaddr 68:f7:28:83:7d:a8
 
 ```
 
-Con esto aplicamos el comando:
+Con esto aplicamos el comando (con doble nivel de informacion para depuracion -vv):
 
 ```
-sudo ansible-playbook utils/deploy/sp.yml -e "target=localhost public_ip=<your_ip4_address> sp_ver=3.0" -v
+sudo ansible-playbook utils/deploy/sp.yml -e "target=localhost public_ip=<your_ip4_address> sp_ver=3.0" -vv
 ```
 
 Donde ```<your_ip4_address>=172.20.1.1``` para nuestro caso. Una vez se sigue con la instalacion. Si todo sale bien, al final se tendra una salida como la siguiente (solo se toma un trozo de esta):
@@ -109,6 +109,12 @@ sudo /etc/init.d/sonata status
 
 El siguiente [video](https://asciinema.org/a/44MwPYliuOxxYBFkkm7M8eqM4) brindado por los creadores el proyecto resalta el proceso completo anteriormente descrito.
 
+## Con que seguir:
+En la parte final de la [pagina de instalacion de sonata](https://github.com/sonata-nfv/son-install/wiki/SONATA-SP-Installation-v3.0) esta la seccion de **Next steps**, en lo que resta se tratará de seguir esta parte con el fin de cojerle el tiro a la herramienta.
+
 ## Notas:
-1. Se intento borrar y reinstalar, se tuvieron un sin numero de problemas, ojala esto quede listo con una instalacion y ya, basicamente se tuvieron que eliminar un monton de herramientas que ya se tenia, molestar con rutas.
+1. Se intento borrar y reinstalar, se tuvieron un sin numero de problemas, ojala esto quede listo con una instalacion y ya
+2. En nuestro caso, por confusion en el proceso de instalacion, se eliminaron archivos y se volvio a empezar el proceso de instalacion, esto arrojo muchos problemas, basicamente se tuvieron que eliminar un monton de herramientas que ya se tenia, molestar con rutas y otras cosas. En resumen toco hacer la de los jedi dejar que: **la fuerza te acompañe**.
+
+
 
