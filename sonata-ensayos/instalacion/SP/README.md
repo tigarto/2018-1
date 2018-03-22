@@ -47,3 +47,4 @@ gedit ~/.ssh/.vault_pass
 # Editar el archivo...
 ```
 
+El siguiente paso consistió en averiguar la IP, tal y como lo resalta el [video](https://asciinema.org/a/32wmaiey5d54d5l6msdd7nu32?autoplay=1)
