@@ -71,6 +71,7 @@ docker0   Link encap:Ethernet  HWaddr 02:42:05:d4:83:c2
           TX packets:391 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:0 
           RX bytes:258636 (258.6 KB)  TX bytes:93327 (93.3 KB)
+          
 enp1s0    Link encap:Ethernet  HWaddr 68:f7:28:83:7d:a8  
           inet addr:172.21.30.124  Bcast:172.21.255.255  Mask:255.255.0.0
           inet6 addr: fe80::b3c1:d16b:4f80:174d/64 Scope:Link
