@@ -39,5 +39,11 @@ git clone https://github.com/sonata-nfv/son-install.git
 cd son-install
 echo sonata | tee ~/.ssh/.vault_pass
 ```
+En nuestro caso particular el comando ```echo sonata | tee ~/.ssh/.vault_pass``` saco problema asi que lo que se hizo fue crear el directorio ```.ssh``` en la carpeta ```~``` asociada al usuario y una vez alli crear el archivo ```.vault_pass``` con un editor de texto colocando ```sonata``` como contenido. Asi:
 
+```
+mkdir ~/.ssh
+gedit ~/.ssh/.vault_pass
+# Editar el archivo...
+```
 
