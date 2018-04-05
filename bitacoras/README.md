@@ -20,3 +20,5 @@ Vamos a ejecutar el comando tal y como se sugiere en las siguientes paginas:
 
 vi roles/sp/defaults/main.yml
 sp_ver: latest
+
+http://www.googlinux.com/list-all-tags-of-docker-image/
