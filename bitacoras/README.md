@@ -22,3 +22,4 @@ vi roles/sp/defaults/main.yml
 sp_ver: latest
 
 http://www.googlinux.com/list-all-tags-of-docker-image/
+https://stackoverflow.com/questions/28320134/how-to-list-all-tags-for-a-docker-image-on-a-remote-registry
